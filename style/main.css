@@ -6,6 +6,7 @@
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
+
 body, html {
     margin: 0;
     padding: 0;
@@ -13,6 +14,7 @@ body, html {
     display: flex;
     flex-direction: column;
 }
+
 header {
     position: fixed;
     top: 0;
@@ -23,6 +25,7 @@ header {
     text-align: start;
     z-index: 1000;
 }
+
 footer {
     position: fixed;
     bottom: 0;
@@ -35,19 +38,26 @@ footer {
     z-index: 1000;
 }
 
-.content::-webkit-scrollbar {
-    width: 10px;
+.disabled_button{
+    display: none;
 }
 
-.content::-webkit-scrollbar-track {
+#contentWrapper::-webkit-scrollbar {
+    width: 10px;
+    z-index: -1;
+}
+
+#contentWrapper::-webkit-scrollbar-track {
     -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
     background-color: #f9f9fd;
-    border-radius: 10px;
+    border-radius: 0px;
+    z-index: -1;
 }
 
-.content::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: linear-gradient(180deg, #00c6fb, #005bea);
+#contentWrapper::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: linear-gradient(180deg, rgb(40, 142, 211), rgb(0, 114, 192));
+    z-index: -1;
 }
 
 .content-wrapper {
@@ -58,6 +68,7 @@ footer {
     padding-bottom: 1.2em; /* Подстраиваемся под содержимое footer */
     overflow-y: auto;
 }
+
 #content {
     padding: 1.2em;
 }
@@ -93,3 +104,76 @@ footer {
     color: black;
 }
 
+.main_footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.step_marker{
+    padding-left: 25px;
+    white-space: nowrap;
+}
+
+.buttons_div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding-right: 25px;
+}
+
+.buttons_div button{
+	height: 50px;
+	width: 150px;
+	margin-left: 10px;
+	border: 0;
+	background: rgb(0, 114, 192);
+	font-size: 20px;
+	font-weight: 600;
+	color: #fff;
+	border-radius: 35px;
+	cursor: pointer;
+	transition: all 0.3s;
+    margin: 2px;
+}
+
+.buttons_div button:active{
+	background: rgb(40, 142, 211);
+}
+
+@media (max-width: 1000px) {
+    #footer{
+        display: flex;
+        flex-direction: column;
+    }
+
+    #control_button_1{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 50px;
+        margin-right: 25px;
+    }
+    
+    #control_button_4{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 50px;
+        margin-left: 25px;
+    }
+    .step_marker{
+        padding-left: 0px;
+        padding-bottom: 15px;
+    }
+    .buttons_div{
+        padding-right: 0px;
+        padding-top: 5px;
+    }
+}
