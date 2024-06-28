@@ -1,0 +1,94 @@
+@import url("fonts/stylesheet.css");
+
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: start;
+    z-index: 1000;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    padding: 1em 0;
+    z-index: 1000;
+}
+
+.content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+    -webkit-box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
+    background-color: #f9f9fd;
+    border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: linear-gradient(180deg, #00c6fb, #005bea);
+}
+
+.content-wrapper {
+    flex: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 1em; /* Подстраиваемся под содержимое header */
+    padding-bottom: 1em; /* Подстраиваемся под содержимое footer */
+    overflow-y: auto;
+}
+#content {
+    padding: 1em;
+}
+
+.black_title{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.black_title h1{
+    padding: 25px;
+    color: #fff;
+    font-size: clamp(20px, 1.5vw, 30px);
+}
+
+.black_title button{
+    white-space: nowrap;
+    background-color: black;
+    height: 60px;
+    font-size: clamp(15px, 0.5vw, 20px);
+    color: white;
+    padding: 15px 35px;
+    border: solid 2px;
+    border-radius: 35px;
+    margin-right: 25px;
+    transition: all 0.3s;
+}
+
+.black_title button:hover{
+    background-color: white;
+    color: black;
+}
+
