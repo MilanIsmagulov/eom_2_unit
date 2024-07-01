@@ -8,6 +8,7 @@ let blackHeader  = document.querySelector('#header_text');
 let numberOfQuestion = 1; 
 let numberOfQuestionSum = 10;
 let windowWidth  = window.innerWidth;
+let originalTitle = title_of_eom;
 
 
 for (let i = 0; i < numberOfQuestion; i++){
@@ -20,14 +21,6 @@ for (let i = 0; i < numberOfQuestionSum-numberOfQuestion; i++){
     let markers = document.createElement('img');
     markers.src = "./content/radio_button.svg";
     stepMarkerPlace.appendChild(markers);
-}
-
-function shortenTitle(element, maxLength) {
-    let title = element.innerText;  // Получаем заголовок элемента
-    if (title.length > maxLength) {
-        let shortenedTitle = title.substring(0, maxLength - 3) + '...';  // Обрезаем и добавляем многоточие
-        element.innerText = shortenedTitle;  // Обновляем заголовок элемента
-    }
 }
 
 window.addEventListener('resize',(e) => {
@@ -43,20 +36,31 @@ window.addEventListener('resize',(e) => {
 
 window.addEventListener('resize',(e) => {
     let windowWidth  = window.innerWidth;
-    if (windowWidth  <=  500)  {
-        shortenTitle(blackHeader, 20);  // Сокращаем заголовок до 20 символов
+    if (windowWidth  <=  650)  {
+        shortenTitle(blackHeader, 30);  // Сокращаем заголовок до 20 символов
         ansverButton.innerHTML  =  '<img src="./content/check_circle.svg" alt=">">';
         reloadButton.innerHTML  =  '<img src="./content/refresh.svg" alt="<">';
     } else {
+        restoreTitle(blackHeader, originalTitle);
         ansverButton.textContent  =  'Ответить';
         reloadButton.textContent  =  'Повторить';
     }
 });
 
+function restoreTitle(element, originalTitle) {
+    element.innerText = originalTitle;  // Восстанавливаем оригинальный заголовок
+}
+
+function shortenTitle(element, maxLength) {
+    let title = element.innerHTML;  // Получаем заголовок элемента
+    if (title.length > maxLength) {
+        let shortenedTitle = title.substring(0, maxLength - 3) + '...';  // Обрезаем и добавляем многоточие
+        element.innerHTML = shortenedTitle;  // Обновляем заголовок элемента
+    }
+}
+
 titleUpper.innerHTML = title_of_eom;
 blackHeader.innerHTML = title_of_eom;
-
-
 
 function adjustContentWrapper() {
     const headerHeight = document.getElementById('header').offsetHeight;
@@ -69,3 +73,4 @@ function adjustContentWrapper() {
 
 window.addEventListener('load', adjustContentWrapper);
 window.addEventListener('resize', adjustContentWrapper);
+
