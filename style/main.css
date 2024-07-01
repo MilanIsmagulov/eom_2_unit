@@ -254,3 +254,26 @@ p{
         width: 80%;
     }
 }
+
+@media (max-width: 500px) {
+    footer{
+        padding: 1px;
+    }
+
+    .step_marker{
+        display: none;
+    }
+
+    .buttons_div button{
+        height: 50px;
+        width: 50px;
+    }
+    .text_with_img img{
+        min-width: 300px !important;
+        width: 70% !important;
+    }
+    .only_img img{
+        min-width: 300px !important;
+        width: 70% !important;
+    }
+}
