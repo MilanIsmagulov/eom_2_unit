@@ -38,6 +38,15 @@ footer {
     z-index: 1000;
 }
 
+p{
+    text-align: justify;
+    text-indent: 4%;
+    margin-bottom: 25px;
+    font-size: clamp(18px, 1.5vw, 25px);
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
 .disabled_button{
     display: none;
 }
@@ -143,6 +152,45 @@ footer {
 	background: rgb(40, 142, 211);
 }
 
+.text_with_img{
+    width: 100%;
+}
+
+.text_with_img img{
+    width: 100%;
+    min-width: 500px;
+}
+
+.img_with_sgn{
+    margin: 25px;
+    float: left;
+}
+
+.img_with_sgn p{
+    text-align: center;
+    margin: 0 !important;
+    margin-top: 10px !important;
+}
+
+.only_img{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 25px;
+}
+
+.only_img p{
+    margin-top: 10px;
+    text-indent: 0% !important;
+    text-align: center;
+    width: 100%;
+}
+
+.only_img img{
+    width: 40%;
+}
+
 @media (max-width: 1000px) {
     #footer{
         display: flex;
@@ -168,12 +216,41 @@ footer {
         width: 50px;
         margin-left: 25px;
     }
+
+    .img_with_sgn{
+        margin: 0 !important;
+        margin-bottom: 25px !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .img_with_sgn p{
+        width: 100%;
+    }
+
     .step_marker{
         padding-left: 0px;
         padding-bottom: 15px;
     }
+
     .buttons_div{
         padding-right: 0px;
         padding-top: 5px;
+    }
+
+    .text_with_img img{
+        min-width: 400px;
+        width: 70%;
+        float: none;
+    }
+    
+    .img_with_sgn{
+        width: 100%;
+    }
+    
+    .only_img img{
+        width: 80%;
     }
 }

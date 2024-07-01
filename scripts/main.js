@@ -1,6 +1,8 @@
 let stepMarkerPlace = document.querySelector('.step_marker');
 let backButton  = document.querySelector('#control_button_1');
 let forwardButton  = document.querySelector('#control_button_4');
+let titleUpper = document.querySelector('#upper_title');
+let blackHeader  = document.querySelector('#header_text');
 let numberOfQuestion = 1; 
 let numberOfQuestionSum = 10;
 
@@ -40,3 +42,6 @@ window.addEventListener('resize',(e) => {
         forwardButton.textContent  =  'Далее';
     }
 });
+
+titleUpper.innerHTML = title_of_eom;
+blackHeader.innerHTML = title_of_eom;
