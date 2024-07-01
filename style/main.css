@@ -198,6 +198,7 @@ p{
     }
 
     #control_button_1{
+        font-size: 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -208,6 +209,7 @@ p{
     }
     
     #control_button_4{
+        font-size: 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
