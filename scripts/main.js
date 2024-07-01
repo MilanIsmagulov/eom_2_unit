@@ -23,6 +23,17 @@ for (let i = 0; i < numberOfQuestionSum-numberOfQuestion; i++){
     stepMarkerPlace.appendChild(markers);
 }
 
+window.addEventListener('load',(e) => {
+    let windowWidth  = window.innerWidth;
+    if (windowWidth  <=  1000)  {
+        forwardButton.innerHTML  =  '<img src="./content/arrow_forward.svg" alt=">">';
+        backButton.innerHTML  =  '<img src="./content/arrow_back.svg" alt="<">';
+    } else {
+        backButton.textContent  =  'Назад';
+        forwardButton.textContent  =  'Далее';
+    }
+});
+
 window.addEventListener('resize',(e) => {
     let windowWidth  = window.innerWidth;
     if (windowWidth  <=  1000)  {
@@ -31,6 +42,19 @@ window.addEventListener('resize',(e) => {
     } else {
         backButton.textContent  =  'Назад';
         forwardButton.textContent  =  'Далее';
+    }
+});
+
+window.addEventListener('load',(e) => {
+    let windowWidth  = window.innerWidth;
+    if (windowWidth  <=  650)  {
+        shortenTitle(blackHeader, 30);  // Сокращаем заголовок до 20 символов
+        ansverButton.innerHTML  =  '<img src="./content/check_circle.svg" alt=">">';
+        reloadButton.innerHTML  =  '<img src="./content/refresh.svg" alt="<">';
+    } else {
+        restoreTitle(blackHeader, originalTitle);
+        ansverButton.textContent  =  'Ответить';
+        reloadButton.textContent  =  'Повторить';
     }
 });
 
