@@ -6,7 +6,7 @@ let forwardButton  = document.querySelector('#control_button_4');
 let titleUpper = document.querySelector('#upper_title');
 let blackHeader  = document.querySelector('#header_text');
 let numberOfQuestion = 1; 
-let numberOfQuestionSum = 10;
+let numberOfQuestionSum = Object.keys(data).length;
 let windowWidth  = window.innerWidth;
 let originalTitle = title_of_eom;
 
@@ -14,12 +14,14 @@ let originalTitle = title_of_eom;
 for (let i = 0; i < numberOfQuestion; i++){
     let markers = document.createElement('img');
     markers.src = "./content/radio_button_blue.svg";
+    markers.classList.add('radio_button_blue');
     stepMarkerPlace.appendChild(markers);
 }
 
 for (let i = 0; i < numberOfQuestionSum-numberOfQuestion; i++){
     let markers = document.createElement('img');
     markers.src = "./content/radio_button.svg";
+    markers.classList.add('radio_button_gray');
     stepMarkerPlace.appendChild(markers);
 }
 
