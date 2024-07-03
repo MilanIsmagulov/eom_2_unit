@@ -84,6 +84,10 @@ function displayPage(index) {
         const testDiv = document.createElement('div');
         testDiv.innerHTML = `<p>ТУТ ДОЛЖЕН БЫТЬ ТЕСТ</p>`; //${pageData[1].text_of_question}
         contentDiv.appendChild(testDiv);
+    } else if (pageData.hasOwnProperty('result')) {
+        const testDiv = document.createElement('div');
+        testDiv.innerHTML = `<p>ТУТ ДОЛЖНЫ БЫТЬ РЕЗУЛЬТАТЫ ТЕСТА</p>`; //${pageData[1].text_of_question}
+        contentDiv.appendChild(testDiv);
     }
 }
 
