@@ -1,6 +1,7 @@
 // Инициализация текущего индекса страницы
 let currentPageIndex = 1;
 
+
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
 const mainBody = document.getElementById('main_body_1');
@@ -161,7 +162,7 @@ function displayPage(index) {
         stepDiv.innerHTML = data[`index_${i}`].step_of_popup;
         popupDiv.appendChild(stepDiv);
     }
-    mainBody.appendChild(popupDiv);
+    contentDiv.appendChild(popupDiv);
     popupDiv.appendChild(closePopUpBtn);
 
     function showPopUp(){
@@ -173,8 +174,12 @@ function displayPage(index) {
         // Отключаем все кнопки на странице
         const buttons = document.querySelectorAll('button, a');
         buttons.forEach(button => {
-            button.disabled = true;
             button.classList += 'gray_dis';
+            if (button.id != 'close_popup_btn'){
+                button.disabled = true;
+            } else {
+                button.disabled = false;
+            }
         });
         const closeBtn = document.querySelector('#close_popup_btn')
         closeBtn.disabled = false;
@@ -194,6 +199,7 @@ function displayPage(index) {
     }
     document.getElementById('close_popup_btn').addEventListener('click', () => closePopUp());
     document.getElementById('popup_button_1').addEventListener('click', () => showPopUp());
+
 }
 
 // Функция для создания маркеров страниц
@@ -232,7 +238,12 @@ function updatePage(step) {
         displayPage(currentPageIndex);
         // Обновление маркеров
         createMarkers();
+
     }
+    const closeBtn2 = document.querySelector('#close_popup_btn')
+    closeBtn2.disabled = false;
+    closeBtn2.classList.remove('gray_dis');
+    closeBtn2.classList = 'close_btn';
 }
 
 
