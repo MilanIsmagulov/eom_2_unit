@@ -178,7 +178,7 @@ function displayPage(index) {
         });
         const closeBtn = document.querySelector('#close_popup_btn')
         closeBtn.disabled = false;
-        closeBtn.classList += 'gray_dis';
+        closeBtn.classList.remove('gray_dis');
         closeBtn.classList = 'close_btn';
     }
     function closePopUp(){
