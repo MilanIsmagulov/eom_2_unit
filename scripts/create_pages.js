@@ -3,7 +3,7 @@ let currentPageIndex = 1;
 
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
-
+const mainBody = document.getElementById('main_body_1');
 // Функция для создания блока с текстом и изображением
 function createTextWithImage(paragraph) {
     // Создание контейнера
@@ -161,7 +161,7 @@ function displayPage(index) {
         stepDiv.innerHTML = data[`index_${i}`].step_of_popup;
         popupDiv.appendChild(stepDiv);
     }
-    contentDiv.appendChild(popupDiv);
+    mainBody.appendChild(popupDiv);
     popupDiv.appendChild(closePopUpBtn);
 
     function showPopUp(){

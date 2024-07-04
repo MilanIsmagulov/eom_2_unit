@@ -23,7 +23,7 @@ header {
     background-color: #333;
     color: white;
     text-align: start;
-    z-index: 1000;
+    z-index: 500;
 }
 
 footer {
@@ -35,7 +35,7 @@ footer {
     color: black;
     text-align: center;
     padding: 0.55em 0;
-    z-index: 1000;
+    z-index: 500;
 }
 
 p{
@@ -260,6 +260,7 @@ p{
     color: black;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 1000;
 }
 
 .popup_window div{
@@ -290,6 +291,7 @@ p{
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1001;
 }
 
 #close_popup_btn img{
