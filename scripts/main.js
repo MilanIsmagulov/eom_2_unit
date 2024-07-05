@@ -93,8 +93,8 @@ function adjustContentWrapper() {
     const footerHeight = document.getElementById('footer').offsetHeight;
     const contentWrapper = document.getElementById('contentWrapper');
 
-    contentWrapper.style.paddingTop = headerHeight + 'px';
-    contentWrapper.style.paddingBottom = footerHeight + 'px';
+    contentWrapper.style.paddingTop = headerHeight + 15 + 'px';
+    contentWrapper.style.paddingBottom = footerHeight + 50 + 'px';
 }
 
 window.addEventListener('load', adjustContentWrapper);

@@ -135,6 +135,9 @@ function displayPage(index) {
             }
         }
     } else if (pageData.hasOwnProperty('test')) {
+        if(pageData.type = 1){
+            console.log('Odin')
+        }
         // Если страница содержит тест, отображаем заглушку
         const testDiv = document.createElement('div');
         testDiv.innerHTML = `<p>ТУТ ДОЛЖЕН БЫТЬ ТЕСТ</p>`;
