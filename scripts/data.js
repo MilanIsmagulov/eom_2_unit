@@ -23,17 +23,19 @@ const data = {
 
     },
     "index_2":{
-        "subtitle": "subtitle 2",
+        "subtitle": "subtitle 2 <p class='black_sub'>dgdgdgdgdfgdg</p>",
         "step_of_popup": "step 2",
         "test":[
             {"type": 1},
-            {"text_of_question": "Lorem ipsum dolor sit amet consectetur adipisicing elit?"},
+           
             {"answers": [
                 "First Answer",
                 "Second Answer",
                 "Third Answer",
                 "Four Answer"
-            ]}
+            ]},
+            {"correct_answer": [1]},
+            {"image": true, "image_path": "./content/test_image.png"}
         ],
     },
     "index_3":{
@@ -85,13 +87,15 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 1},
-            {"text_of_question": "Lorem ipsum dolor sit amet consectetur adipisicing elit?"},
+           
             {"answers": [
                 "First Answer",
                 "Second Answer",
                 "Third Answer",
                 "Four Answer"
-            ]}
+            ]},
+            {"correct_answer": [0, 1]},
+            {"image": false, "image_path": "./content/test_image.png"}
         ],
     },
     "index_7":{
@@ -153,8 +157,51 @@ const data = {
         
     },
     "index_11":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 3},
+           
+            {"answers": [
+                "First Answer",
+                "Second Answer",
+                "Third Answer",
+                "Four Answer"
+            ]}
+        ],
+    },
+    "index_12":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 4},
+           
+            {"answers": [
+                "First Answer",
+                "Second Answer",
+                "Third Answer",
+                "Four Answer"
+            ]}
+        ],
+    },
+    "index_13":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 5},
+           
+            {"answers": [
+                "First Answer",
+                "Second Answer",
+                "Third Answer",
+                "Four Answer"
+            ]}
+        ],
+    },
+    "index_14":{
         "subtitle": "Тут типа результаты",
         "step_of_popup": "Тут типа результаты",
         "result":[]
     },
 }
+

@@ -326,6 +326,20 @@ p{
 	background-color: #00000030;
 }
 
+.black_sub{
+    color: black;
+    font-weight: 500;
+}
+
+.correct { 
+    background-color: green; 
+}
+
+.incorrect { 
+    background-color: red; 
+}
+
+
 @media (max-width: 1000px) {
     #footer{
         display: flex;

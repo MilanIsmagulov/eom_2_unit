@@ -1,6 +1,7 @@
 // Инициализация текущего индекса страницы
 let currentPageIndex = 1;
-
+const answerButton = document.getElementById('control_button_2');
+const restartButton = document.getElementById('control_button_3');
 
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
@@ -135,18 +136,44 @@ function displayPage(index) {
             }
         }
     } else if (pageData.hasOwnProperty('test')) {
-        if(pageData.type = 1){
-            console.log('Odin')
+        function loadScript(src) {
+            const script = document.createElement('script');
+            script.src = src;
+            script.defer = true;
+            script.onload = () => {};
+            document.head.appendChild(script);
         }
-        // Если страница содержит тест, отображаем заглушку
-        const testDiv = document.createElement('div');
-        testDiv.innerHTML = `<p>ТУТ ДОЛЖЕН БЫТЬ ТЕСТ</p>`;
-        contentDiv.appendChild(testDiv);
+        pageData.test.forEach(testItem => {
+            if (testItem.hasOwnProperty('type')) {
+                switch (testItem.type) {
+                    case 1:
+                        loadScript('./scripts/script_of_tests/test_type_1.js');
+                        break;
+                    case 2:
+                        loadScript('./scripts/script_of_tests/test_type_2.js');
+                        break;
+                    case 3:
+                        loadScript('./scripts/script_of_tests/test_type_3.js');
+                        break;
+                    case 4:
+                        loadScript('./scripts/script_of_tests/test_type_4.js');
+                        break;
+                    case 5:
+                        loadScript('./scripts/script_of_tests/test_type_5.js');
+                        break;
+                    default:
+                        console.log('Неизвестный тип теста');
+                        break;
+                }
+            }
+        });
+        
     } else if (pageData.hasOwnProperty('result')) {
-        // Если страница содержит результаты теста, отображаем заглушку
-        const testDiv = document.createElement('div');
-        testDiv.innerHTML = `<p>ТУТ ДОЛЖНЫ БЫТЬ РЕЗУЛЬТАТЫ ТЕСТА</p>`;
-        contentDiv.appendChild(testDiv);
+        const script = document.createElement('script');
+        script.src = './scripts/script_of_tests/result_of_test.js';
+        script.async = true;
+        script.onload = () => {};
+        document.head.appendChild(script);
     }
 
     // Добавление содержимого модального окна
