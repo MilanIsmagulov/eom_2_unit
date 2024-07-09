@@ -48,7 +48,7 @@ p{
     margin-right: 25px;
 }
 
-.disabled{
+.hidden, .disabled{
     display: none;
 }
 
@@ -329,10 +329,6 @@ p{
 .black_sub{
     color: black;
     font-weight: 500;
-}
-
-.incorrect { 
-    background-color: red; 
 }
 
 .answers_btn{

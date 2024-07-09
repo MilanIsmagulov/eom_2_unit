@@ -1,3 +1,6 @@
+answerButton.classList.add('gray_dis');
+answerButton.disabled = true;
+
 function createTest(index) {
     const test = data[index].test;
     const answers = test.find(item => item.answers).answers;
@@ -41,23 +44,52 @@ function createTest(index) {
 
     answersDiv.appendChild(form);
     contentDiv.appendChild(answersDiv);
+
+    // Функция для обновления состояния кнопки
+    function updateButtonState() {
+        const inputs = form.querySelectorAll('input');
+        const anyChecked = Array.from(inputs).some(input => input.checked);
+
+        if (anyChecked) {
+            answerButton.classList.remove('gray_dis');
+            answerButton.disabled = false;
+        } else {
+            answerButton.classList.add('gray_dis');
+            answerButton.disabled = true;
+        }
+    }
+
+    // Инициализация состояния кнопки при загрузке страницы
+    updateButtonState();
+
+    // Найти все input элементы и добавить слушатель события 'change'
+    form.querySelectorAll('input').forEach((input) => {
+        input.addEventListener('change', updateButtonState);
+    });
 }
 
 function handleAnswer() {
     const form = contentDiv.querySelector('form');
     const correctAnswers = form.dataset.right.split(',').map(Number);
     const inputs = form.querySelectorAll('input');
+
     let allCorrect = true;
 
     inputs.forEach(input => {
         const answerDiv = input.parentElement;
-        if (input.checked && correctAnswers.includes(parseInt(input.value))) {
-            answerDiv.classList.add('correct');
-        } else if (input.checked && !correctAnswers.includes(parseInt(input.value))) {
-            answerDiv.classList.add('incorrect');
-            allCorrect = false;
-        } else if (!input.checked && correctAnswers.includes(parseInt(input.value))) {
-            answerDiv.classList.add('correct');
+        answerDiv.classList.remove('correct', 'incorrect');
+        if (input.checked) {
+            if (correctAnswers.includes(parseInt(input.value))) {
+                answerDiv.classList.add('correct');
+            } else {
+                answerDiv.classList.add('incorrect');
+                allCorrect = false;
+            }
+        } else {
+            if (correctAnswers.includes(parseInt(input.value))) {
+                allCorrect = false;
+                answerDiv.classList.add('incorrect');
+            }
         }
     });
 
@@ -81,5 +113,4 @@ controlButton2.addEventListener('click', handleAnswer);
 controlButton3.addEventListener('click', resetTest);
 
 // Initialize the test
-// Change 'index_2' to the current test index you need to load
 createTest(`index_${currentPageIndex}`);

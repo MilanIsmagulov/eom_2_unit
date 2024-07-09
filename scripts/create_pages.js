@@ -13,8 +13,22 @@ let currentTestIndex = null;
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
 const mainBody = document.getElementById('main_body_1');
+
+
+function addFirstBtn(){
+    const answerBtn = document.getElementById('control_button_2');
+    const backWardBtn = document.getElementById('control_button_1');
+    backWardBtn.classList.remove('hidden');
+    answerBtn.classList.remove('hidden');
+}
+
+
 // Функция для создания блока с текстом и изображением
 function createTextWithImage(paragraph) {
+    const answerBtn = document.getElementById('control_button_2');
+    answerBtn.classList.add('hidden');
+    const reloadBtn = document.getElementById('control_button_3');
+    reloadBtn.classList.add('hidden');
     // Создание контейнера
     const container = document.createElement('div');
     // Присвоение класса контейнеру
@@ -49,6 +63,10 @@ function createTextWithImage(paragraph) {
 
 // Функция для создания блока только с изображением
 function createOnlyImage(paragraph) {
+    const answerBtn = document.getElementById('control_button_2');
+    answerBtn.classList.add('hidden');
+    const reloadBtn = document.getElementById('control_button_3');
+    reloadBtn.classList.add('hidden');
     // Создание контейнера
     const container = document.createElement('div');
     // Присвоение класса контейнеру
@@ -74,6 +92,10 @@ function createOnlyImage(paragraph) {
 
 // Функция для создания блока только с текстом
 function createPlainText(paragraph) {
+    const answerBtn = document.getElementById('control_button_2');
+    answerBtn.classList.add('hidden');
+    const reloadBtn = document.getElementById('control_button_3');
+    reloadBtn.classList.add('hidden');
     // Создание контейнера
     const container = document.createElement('div');
     // Присвоение класса контейнеру
@@ -143,6 +165,8 @@ function displayPage(index) {
             }
         }
     } else if (pageData.hasOwnProperty('test')) {
+        const answerBtn = document.getElementById('control_button_2');
+        answerBtn.classList.remove('hidden');
         function loadScript(src) {
             const script = document.createElement('script');
             script.src = src;
