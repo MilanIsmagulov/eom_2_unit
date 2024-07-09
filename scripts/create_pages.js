@@ -1,7 +1,14 @@
+const testContainer = document.getElementById('test-container');
+// let currentTestIndex = 2; // Default test index, change as needed
 // Инициализация текущего индекса страницы
 let currentPageIndex = 1;
 const answerButton = document.getElementById('control_button_2');
 const restartButton = document.getElementById('control_button_3');
+
+// const contentDiv = document.getElementById('content');
+const controlButton2 = document.getElementById('control_button_2');
+const controlButton3 = document.getElementById('control_button_3');
+let currentTestIndex = null;
 
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
@@ -232,8 +239,10 @@ function displayPage(index) {
 
 }
 
+// const stepMarkerPlace = document.getElementsByClassName('step_marker')
 // Функция для создания маркеров страниц
 function createMarkers() {
+    
     // Получение количества страниц
     const numOfPages = Object.keys(data).length;
     // Очистка контейнера маркеров

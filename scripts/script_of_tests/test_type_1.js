@@ -1,131 +1,85 @@
+function createTest(index) {
+    const test = data[index].test;
+    const answers = test.find(item => item.answers).answers;
+    const correctAnswers = test.find(item => item.correct_answer).correct_answer;
+    const image = test.find(item => item.image);
 
+    const answersDiv = document.createElement('div');
+    answersDiv.className = 'answers_btn';
+    answersDiv.id = `answers_buttons_${index}`;
 
-function createTest(testData, index) {
-    const testContainer = document.createElement('div');
-    testContainer.className = 'answers_btn';
-    testContainer.id = `answers_buttons_${index}`;
-
-    const imageInfo = testData.find(item => item.image !== undefined);
-    if (imageInfo && imageInfo.image) {
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'answer_form_img';
+    if (image && image.image) {
+        const imgDiv = document.createElement('div');
+        imgDiv.className = 'answer_form_img';
         const img = document.createElement('img');
-        img.src = imageInfo.image_path;
-        imageDiv.appendChild(img);
-        testContainer.appendChild(imageDiv);
+        img.src = image.image_path;
+        imgDiv.appendChild(img);
+        answersDiv.appendChild(imgDiv);
     }
 
     const form = document.createElement('form');
     form.className = 'answer_form';
     form.id = `answer_form_${index}`;
+    form.dataset.right = correctAnswers.join(',');
 
-    const correctAnswer = testData.find(item => item.correct_answer !== undefined);
-    if (correctAnswer) {
-        form.dataset.right = correctAnswer.correct_answer.join(',');
-    }
+    answers.forEach((answer, i) => {
+        const answerDiv = document.createElement('div');
+        answerDiv.className = 'answer_div';
 
-    const answers = testData.find(item => item.answers !== undefined);
-    if (answers) {
-        answers.answers.forEach((answer, i) => {
-            const answerDiv = document.createElement('div');
-            answerDiv.className = 'answer_div';
+        const input = document.createElement('input');
+        input.type = correctAnswers.length > 1 ? 'checkbox' : 'radio';
+        input.name = index;
+        input.value = i;
 
-            const input = document.createElement('input');
-            input.type = correctAnswer.correct_answer.length > 1 ? 'checkbox' : 'radio';
-            input.name = index;
-            input.value = i;
-            answerDiv.appendChild(input);
+        const p = document.createElement('p');
+        p.textContent = answer;
 
-            const p = document.createElement('p');
-            p.textContent = answer;
-            answerDiv.appendChild(p);
+        answerDiv.appendChild(input);
+        answerDiv.appendChild(p);
+        form.appendChild(answerDiv);
+    });
 
-            // Add click event listener to answerDiv
-            answerDiv.addEventListener('click', (event) => {
-                if (event.target !== input) {
-                    input.checked = !input.checked;
-                }
-            });
-
-            form.appendChild(answerDiv);
-        });
-    }
-
-    testContainer.appendChild(form);
-    return testContainer;
+    answersDiv.appendChild(form);
+    contentDiv.appendChild(answersDiv);
 }
 
-function displayTest() {
-    const testData = data.index_2.test;
-    const testIndex = '2';
-    const testElement = createTest(testData, testIndex);
-    contentDiv.appendChild(testElement);
-}
-
-function checkAnswers() {
-    const form = document.querySelector('.answer_form');
-    if (!form) return;
-
+function handleAnswer() {
+    const form = contentDiv.querySelector('form');
     const correctAnswers = form.dataset.right.split(',').map(Number);
     const inputs = form.querySelectorAll('input');
-    let userAnswers = [];
+    let allCorrect = true;
+
     inputs.forEach(input => {
-        if (input.checked) {
-            userAnswers.push(Number(input.value));
+        const answerDiv = input.parentElement;
+        if (input.checked && correctAnswers.includes(parseInt(input.value))) {
+            answerDiv.classList.add('correct');
+        } else if (input.checked && !correctAnswers.includes(parseInt(input.value))) {
+            answerDiv.classList.add('incorrect');
+            allCorrect = false;
+        } else if (!input.checked && correctAnswers.includes(parseInt(input.value))) {
+            answerDiv.classList.add('correct');
         }
     });
 
-    const isMultipleChoice = correctAnswers.length > 1;
+    localStorage.setItem('answer_' + form.id, JSON.stringify({ questionPlace: allCorrect }));
+    controlButton2.classList.add('hidden');
+    controlButton3.classList.remove('hidden');
+}
 
-    if (isMultipleChoice) {
-        // Multiple choice logic
-        let hasIncorrect = false;
-        inputs.forEach(input => {
-            const answerDiv = input.closest('.answer_div');
-            if (input.checked) {
-                if (correctAnswers.includes(Number(input.value))) {
-                    answerDiv.classList.add('correct');
-                } else {
-                    answerDiv.classList.add('incorrect');
-                    hasIncorrect = true;
-                }
-            }
-        });
-        if (!hasIncorrect) {
-            inputs.forEach(input => {
-                if (correctAnswers.includes(Number(input.value)) && input.checked) {
-                    const answerDiv = input.closest('.answer_div');
-                    answerDiv.classList.add('correct');
-                }
-            });
-        }
-    } else {
-        // Single choice logic
-        inputs.forEach(input => {
-            const answerDiv = input.closest('.answer_div');
-            if (input.checked) {
-                if (correctAnswers.includes(Number(input.value))) {
-                    answerDiv.classList.add('correct');
-                } else {
-                    answerDiv.classList.add('incorrect');
-                }
-            }
-        });
+function resetTest() {
+    const answersButtons = document.querySelector('.answers_btn');
+    if (answersButtons) {
+        answersButtons.remove();
     }
 
-    localStorage.setItem('answer2', JSON.stringify({ questionPlace: !userAnswers.some(ans => !correctAnswers.includes(ans)) }));
-    answerButton.classList.add('hidden');
-    restartButton.classList.remove('hidden');
+    createTest(`index_${currentPageIndex}`);
+    controlButton2.classList.remove('hidden');
+    controlButton3.classList.add('hidden');
 }
 
-function restartTest() {
-    contentDiv.innerHTML = '';
-    displayTest();
-    answerButton.classList.remove('hidden');
-    restartButton.classList.add('hidden');
-}
+controlButton2.addEventListener('click', handleAnswer);
+controlButton3.addEventListener('click', resetTest);
 
-answerButton.addEventListener('click', checkAnswers);
-restartButton.addEventListener('click', restartTest);
-
-displayTest();
+// Initialize the test
+// Change 'index_2' to the current test index you need to load
+createTest(`index_${currentPageIndex}`);
