@@ -161,28 +161,17 @@ const data = {
         "subtitle": "subtitle 3333",
         "step_of_popup": "step 2",
         "test":[
-            {"type": 3},
-           
-            {"answers": [
-                "First Answer",
-                "Second Answer",
-                "Third Answer",
-                "Four Answer"
-            ]}
+            {"type": 2},
+            {"test_with_text": "{=Бубльгум; =Баблгам}"},
+            {"image": true, "image_path": "./content/test_image.png"},
         ],
     },
     "index_12":{
         "subtitle": "subtitle 3333",
         "step_of_popup": "step 2",
         "test":[
-            {"type": 4},
-           
-            {"answers": [
-                "First Answer",
-                "Second Answer",
-                "Third Answer",
-                "Four Answer"
-            ]}
+            {"type": 2},
+            {"test_with_text": "Россия {=священная} наша {=держава}"}
         ],
     },
     "index_13":{

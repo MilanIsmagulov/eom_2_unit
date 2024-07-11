@@ -68,6 +68,13 @@ function createTest(index) {
     });
 }
 
+function blockInputs(){
+    const inputs = document.querySelectorAll('input')
+    inputs.forEach((input) => {
+        input.disabled = true;
+    });
+}
+
 function handleAnswer() {
     const form = contentDiv.querySelector('form');
     const correctAnswers = form.dataset.right.split(',').map(Number);
@@ -80,13 +87,16 @@ function handleAnswer() {
         answerDiv.classList.remove('correct', 'incorrect');
         if (input.checked) {
             if (correctAnswers.includes(parseInt(input.value))) {
+                blockInputs();
                 answerDiv.classList.add('correct');
             } else {
+                blockInputs();
                 answerDiv.classList.add('incorrect');
                 allCorrect = false;
             }
         } else {
             if (correctAnswers.includes(parseInt(input.value))) {
+                blockInputs();
                 allCorrect = false;
                 answerDiv.classList.add('incorrect');
             }
