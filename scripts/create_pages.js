@@ -14,6 +14,8 @@ let currentTestIndex = null;
 const contentDiv = document.getElementById('content');
 const mainBody = document.getElementById('main_body_1');
 
+const backWardBtn = document.getElementById('control_button_1');
+const nextBtn = document.getElementById('control_button_4');
 
 function addFirstBtn(){
     const answerBtn = document.getElementById('control_button_2');
@@ -230,18 +232,15 @@ function displayPage(index) {
         // Блокируем скролл страницы
         const bodyScroll = document.getElementById('contentWrapper')
         bodyScroll.style.overflow = 'hidden';
-        popupDiv.classList.remove('disabled')
-        popupDiv.classList.add('enabled')
-        // Отключаем все кнопки на странице
-        const buttons = document.querySelectorAll('button, a');
-        buttons.forEach(button => {
-            button.classList += 'gray_dis';
-            if (button.id != 'close_popup_btn'){
-                button.disabled = true;
-            } else {
-                button.disabled = false;
-            }
-        });
+        popupDiv.classList.remove('disabled');
+        popupDiv.classList.add('enabled');
+        const backWardBtn = document.getElementById('control_button_1');
+        const nextBtn = document.getElementById('control_button_4');
+        backWardBtn.classList.add('gray_dis')
+        nextBtn.classList.add('gray_dis')
+        backWardBtn.disabled = true;
+        nextBtn.disabled = true;
+
         const closeBtn = document.querySelector('#close_popup_btn')
         closeBtn.disabled = false;
         closeBtn.classList.remove('gray_dis');
@@ -250,14 +249,28 @@ function displayPage(index) {
     function closePopUp(){
         const bodyScroll = document.getElementById('contentWrapper')
         bodyScroll.style.overflow = 'auto';
-        const buttons = document.querySelectorAll('button, a');
-        buttons.forEach(button => {
-            button.disabled = false;
-            button.classList.remove('gray_dis');
-        });
+        const backWardBtn = document.getElementById('control_button_1');
+        const nextBtn = document.getElementById('control_button_4');
+        if(!pageData.hasOwnProperty('test')){
+            backWardBtn.classList.remove('gray_dis')
+            nextBtn.classList.remove('gray_dis')
+            backWardBtn.disabled = false;
+            nextBtn.disabled = false;
+        }
+
         popupDiv.classList.add('disabled')
         popupDiv.classList.remove('enabled')
     }
+    function changeStatusBtn(){
+        backWardBtn.classList.remove('gray_dis')
+        nextBtn.classList.remove('gray_dis')
+        backWardBtn.disabled = false;
+        nextBtn.disabled = false;
+    }
+    
+    const closePopBtn2 = document.getElementById('close_popup_btn');
+    closePopBtn2.addEventListener('click', ()=> changeStatusBtn());
+
     document.getElementById('close_popup_btn').addEventListener('click', () => closePopUp());
     document.getElementById('popup_button_1').addEventListener('click', () => showPopUp());
 
@@ -301,7 +314,6 @@ function updatePage(step) {
         displayPage(currentPageIndex);
         // Обновление маркеров
         createMarkers();
-
     }
     const closeBtn2 = document.querySelector('#close_popup_btn')
     closeBtn2.disabled = false;
@@ -314,6 +326,9 @@ function updatePage(step) {
 document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
 document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
 
+
+
+restartButton.disabled = false;
 // Начальное отображение первой страницы и маркеров
 displayPage(currentPageIndex);
 createMarkers();

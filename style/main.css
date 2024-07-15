@@ -378,6 +378,46 @@ p{
     max-width: 76px;
 }
 
+
+#dynamic-content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.image_test_type_2{
+    min-width: 500px;
+    width: 35%;
+    margin-right: clamp(25px,1.25vw,50px);
+    margin-left: 25px;
+}
+
+.image_test_type_2 img{
+    width: 100%;
+}
+
+.description_w_input{
+    width: 65%;
+}
+
+.description_w_input label{
+    font-size: 25px;
+    font-weight: 900;
+    color: rgb(0, 114, 192);
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.description_w_input input{
+    height: 20px;
+    padding: 15px;
+    font-size: 25px;
+    border-radius: 15px;
+    width: 500px;
+}
+
+
 .correct {
     transition: all 0.3s;
     background-color: rgb(168, 255, 168);
@@ -387,6 +427,7 @@ p{
     transition: all 0.3s;
     background: rgb(255, 144, 144);
 }
+
 
 @media (max-width: 1000px) {
     .answer_form_img{

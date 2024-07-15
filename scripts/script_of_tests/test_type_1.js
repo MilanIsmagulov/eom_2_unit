@@ -1,5 +1,11 @@
 answerButton.classList.add('gray_dis');
 answerButton.disabled = true;
+answerButton.classList.remove('disabled');
+
+backWardBtn.classList.add('gray_dis')
+nextBtn.classList.add('gray_dis')
+backWardBtn.disabled = true;
+nextBtn.disabled = true;
 
 function createTest(index) {
     const test = data[index].test;
@@ -51,6 +57,7 @@ function createTest(index) {
         const anyChecked = Array.from(inputs).some(input => input.checked);
 
         if (anyChecked) {
+
             answerButton.classList.remove('gray_dis');
             answerButton.disabled = false;
         } else {
@@ -81,7 +88,10 @@ function handleAnswer() {
     const inputs = form.querySelectorAll('input');
 
     let allCorrect = true;
-
+    backWardBtn.classList.remove('gray_dis')
+    nextBtn.classList.remove('gray_dis')
+    backWardBtn.disabled = false;
+    nextBtn.disabled = false;
     inputs.forEach(input => {
         const answerDiv = input.parentElement;
         answerDiv.classList.remove('correct', 'incorrect');
@@ -109,6 +119,10 @@ function handleAnswer() {
 }
 
 function resetTest() {
+    backWardBtn.classList.add('gray_dis')
+    nextBtn.classList.add('gray_dis')
+    backWardBtn.disabled = true;
+    nextBtn.disabled = true;
     const answersButtons = document.querySelector('.answers_btn');
     if (answersButtons) {
         answersButtons.remove();
@@ -124,3 +138,4 @@ controlButton3.addEventListener('click', resetTest);
 
 // Initialize the test
 createTest(`index_${currentPageIndex}`);
+

@@ -162,7 +162,8 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 2},
-            {"test_with_text": "{=Бубльгум; =Баблгам}"},
+            {"description": "<b>Lorem ipsum dolor sit amet</b> consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores, fugit est ducimus dolor possimus officiis reiciendis nesciunt perferendis facilis? Beatae ea culpa a modi! Harum ex inventore laborum officiis ipsa. Soluta voluptate consequuntur a ex est qui. Earum dignissimos exercitationem aperiam dolore veniam deserunt beatae, blanditiis vero ea natus illum ipsum aliquid asperiores ab vel architecto iure aliquam error iusto? "},
+            {"test_with_text": "{=Бубльгум; =Баблгам; =бубльгум; =баблгам}"},
             {"image": true, "image_path": "./content/test_image.png"},
         ],
     },
@@ -171,7 +172,9 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 2},
-            {"test_with_text": "Россия {=священная} наша {=держава}"}
+            {"description": "Тут пишем описание задания"},
+            {"test_with_text_2": "Россия {=священная} наша {=держава}"},
+            {"image": true, "image_path": "./content/test_image.png"},
         ],
     },
     "index_13":{
