@@ -1,7 +1,7 @@
-const answerBtn = document.getElementById('control_button_2');
+
 answerBtn.disabled = false;
 answerButton.classList.remove('disabled');
-
+removeAllEventListeners();
 
 function createTest(index) {
     const content = document.getElementById('content');
@@ -48,6 +48,7 @@ function createTest(index) {
         const input = document.createElement('input');
         input.type = 'text';
         input.id = 'test_type_2';
+        input.setAttribute('autocomplete', 'off');
         input.name = 'test_type_2';
         input.dataset.correctAnswer = testWithText.test_with_text.replace(/[\{\}=]/g, '').split(';').map(ans => ans.trim()).join(';');
         descriptionDiv.appendChild(input);
@@ -62,6 +63,7 @@ function createTest(index) {
                 const input = document.createElement('input');
                 input.type = 'text';
                 input.className = 'gap';
+                input.setAttribute('autocomplete', 'off');
                 input.dataset.correctAnswer = matches[index][1];
                 descriptionDiv.appendChild(input);
             }
@@ -76,12 +78,12 @@ function createTest(index) {
 
 function checkAnswers(index) {
     const content = document.getElementById('dynamic-content');
-    const inputs = content.querySelectorAll('input[type="text"]');
+    const inputs = content.querySelectorAll('input');
     let allCorrect = true;
 
     inputs.forEach(input => {
         const userAnswer = input.value.trim();
-        const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(';').map(ans => ans.trim()) : [];
+        const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(',').map(ans => ans.trim()) : [];
 
         if (correctAnswers.includes(userAnswer)) {
             input.classList.add('correct');
@@ -103,15 +105,31 @@ function resetTest(index) {
     createTest(index);
 }
 
-document.getElementById('control_button_2').addEventListener('click', () => {
-    const index = `index_${currentPageIndex}`; // Example index, replace with dynamic index if needed
-    checkAnswers(index);
-});
+// Функция для добавления новых слушателей событий
+function addEventListeners() {
+    document.getElementById('control_button_2').addEventListener('click', () => {
+        const index = `index_${currentPageIndex}`;
+        checkAnswers(index);
+    });
 
-document.getElementById('control_button_3').addEventListener('click', () => {
-    const index = `index_${currentPageIndex}`; // Example index, replace with dynamic index if needed
-    resetTest(index);
-});
+    document.getElementById('control_button_3').addEventListener('click', () => {
+        const index = `index_${currentPageIndex}`;
+        resetTest(index);
+    });
+}
 
-// Initial call to create the test
-createTest(`index_${currentPageIndex}`); // Example index, replace with dynamic index if needed
+function resetEventListeners() {
+    removeAllEventListeners();
+    addEventListeners();
+}
+
+function restartTest() {
+    // Initial call to create the test
+    createTest(`index_${currentPageIndex}`);
+    resetEventListeners(); // Перезагрузить слушатели событий
+    answerButton.classList.remove('hidden');
+    restartButton.classList.add('hidden');
+}
+
+// Пример вызова restartTest для тестирования
+restartTest();

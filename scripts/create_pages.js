@@ -13,9 +13,9 @@ let currentTestIndex = null;
 // Получение ссылки на элемент с id 'content'
 const contentDiv = document.getElementById('content');
 const mainBody = document.getElementById('main_body_1');
-
 const backWardBtn = document.getElementById('control_button_1');
 const nextBtn = document.getElementById('control_button_4');
+const answerBtn = document.getElementById('control_button_2');
 
 function addFirstBtn(){
     const answerBtn = document.getElementById('control_button_2');
@@ -27,6 +27,7 @@ function addFirstBtn(){
 
 // Функция для создания блока с текстом и изображением
 function createTextWithImage(paragraph) {
+    
     const answerBtn = document.getElementById('control_button_2');
     answerBtn.classList.add('hidden');
     const reloadBtn = document.getElementById('control_button_3');
@@ -169,30 +170,24 @@ function displayPage(index) {
     } else if (pageData.hasOwnProperty('test')) {
         const answerBtn = document.getElementById('control_button_2');
         answerBtn.classList.remove('hidden');
-        function loadScript(src) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            script.onload = () => {};
-            document.head.appendChild(script);
-        }
+    
         pageData.test.forEach(testItem => {
             if (testItem.hasOwnProperty('type')) {
                 switch (testItem.type) {
                     case 1:
-                        loadScript('./scripts/script_of_tests/test_type_1.js');
+                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 2:
-                        loadScript('./scripts/script_of_tests/test_type_2.js');
+                        replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
                         break;
                     case 3:
-                        loadScript('./scripts/script_of_tests/test_type_3.js');
+                        replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
                         break;
                     case 4:
-                        loadScript('./scripts/script_of_tests/test_type_4.js');
+                        replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
                         break;
                     case 5:
-                        loadScript('./scripts/script_of_tests/test_type_5.js');
+                        replaceScript('./scripts/script_of_tests/test_type_5.js', 'test-script');
                         break;
                     default:
                         console.log('Неизвестный тип теста');
@@ -200,7 +195,7 @@ function displayPage(index) {
                 }
             }
         });
-        
+
     } else if (pageData.hasOwnProperty('result')) {
         const script = document.createElement('script');
         script.src = './scripts/script_of_tests/result_of_test.js';
@@ -302,8 +297,64 @@ function createMarkers() {
     }
 }
 
-// Функция для обновления страницы
+
+// Удаление всех обработчиков событий с кнопок
+function removeAllEventListeners() {
+    let oldControlButton2 = document.getElementById('control_button_2');
+    let newControlButton2 = oldControlButton2.cloneNode(true);
+    oldControlButton2.parentNode.replaceChild(newControlButton2, oldControlButton2);
+
+    let oldControlButton3 = document.getElementById('control_button_3');
+    let newControlButton3 = oldControlButton3.cloneNode(true);
+    oldControlButton3.parentNode.replaceChild(newControlButton3, oldControlButton3);
+    setTimeout(() => {
+        document.getElementById('control_button_2').addEventListener('click', () => {
+            const index = `index_${currentPageIndex}`;
+            checkAnswers(index);
+        });
+        
+        document.getElementById('control_button_3').addEventListener('click', () => {
+            const index = `index_${currentPageIndex}`;
+            resetTest(index);
+        });
+    
+    }, 500);
+}
+
+// Очистка контента страницы перед загрузкой нового теста
+function clearContent() {
+    contentDiv.innerHTML = '';
+}
+
+// Обновленная функция для замены скрипта теста
+function replaceScript(src, id) {
+    const existingScript = document.getElementById(id);
+    if (existingScript) {
+        existingScript.remove();
+    }
+
+    const script = document.createElement('script');
+    script.src = src;
+    script.defer = true;
+    script.id = id;
+    document.head.appendChild(script);
+}
+
+// Удаление скриптов тестов и очистка контента перед переходом на новую страницу
+function removeTestScripts() {
+    const existingScript = document.getElementById('test-script');
+    if (existingScript) {
+        existingScript.remove();
+    }
+
+    clearContent();
+}
+
+// Обновленная функция для обновления страницы
 function updatePage(step) {
+    // Удаляем скрипты тестов перед переходом на новую страницу
+    removeTestScripts();
+
     // Получение количества страниц
     const numOfPages = Object.keys(data).length;
     // Проверка, что новый индекс страницы в допустимых пределах
@@ -315,20 +366,101 @@ function updatePage(step) {
         // Обновление маркеров
         createMarkers();
     }
-    const closeBtn2 = document.querySelector('#close_popup_btn')
+    const closeBtn2 = document.querySelector('#close_popup_btn');
     closeBtn2.disabled = false;
     closeBtn2.classList.remove('gray_dis');
     closeBtn2.classList = 'close_btn';
+    // removeAllEventListeners();
 }
-
 
 // Добавление обработчиков событий для кнопок навигации
 document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
 document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
 
-
-
-restartButton.disabled = false;
 // Начальное отображение первой страницы и маркеров
 displayPage(currentPageIndex);
 createMarkers();
+
+// // Функция для удаления скрипта тестов по id
+// function removeTestScripts() {
+//     const existingScript = document.getElementById('test-script');
+//     if (existingScript) {
+//         existingScript.remove();
+//     }
+// }
+
+// // Обновленная функция для обновления страницы
+// function updatePage(step) {
+//     // Удаляем скрипты тестов перед переходом на новую страницу
+//     removeTestScripts();
+
+//     // Получение количества страниц
+//     const numOfPages = Object.keys(data).length;
+//     // Проверка, что новый индекс страницы в допустимых пределах
+//     if ((currentPageIndex + step) >= 1 && (currentPageIndex + step) <= numOfPages) {
+//         // Обновление индекса текущей страницы
+//         currentPageIndex += step;
+//         // Отображение новой страницы
+//         displayPage(currentPageIndex);
+//         // Обновление маркеров
+//         createMarkers();
+//     }
+//     const closeBtn2 = document.querySelector('#close_popup_btn');
+//     closeBtn2.disabled = false;
+//     closeBtn2.classList.remove('gray_dis');
+//     closeBtn2.classList = 'close_btn';
+// }
+
+// // Добавление обработчиков событий для кнопок навигации
+// document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
+// document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
+
+// // Начальное отображение первой страницы и маркеров
+// displayPage(currentPageIndex);
+// createMarkers();
+
+
+// __________________________
+
+// else if (pageData.hasOwnProperty('test')) {
+//     const answerBtn = document.getElementById('control_button_2');
+//     answerBtn.classList.remove('hidden');
+
+//     function replaceScript(src, id) {
+//         const existingScript = document.getElementById(id);
+//         if (existingScript) {
+//             existingScript.remove();
+//         }
+
+//         const script = document.createElement('script');
+//         script.src = src;
+//         script.defer = true;
+//         script.id = id;
+//         document.head.appendChild(script);
+//     }
+
+//     pageData.test.forEach(testItem => {
+//         if (testItem.hasOwnProperty('type')) {
+//             switch (testItem.type) {
+//                 case 1:
+//                     replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
+//                     break;
+//                 case 2:
+//                     replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
+//                     break;
+//                 case 3:
+//                     replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
+//                     break;
+//                 case 4:
+//                     replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
+//                     break;
+//                 case 5:
+//                     replaceScript('./scripts/script_of_tests/test_type_5.js', 'test-script');
+//                     break;
+//                 default:
+//                     console.log('Неизвестный тип теста');
+//                     break;
+//             }
+//         }
+//     });
+// } 

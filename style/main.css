@@ -7,6 +7,13 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+input:-internal-autofill-selected{
+    appearance: menulist-button;
+    background-image: none !important;
+    background-color: light-dark(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important;
+    color: rgba(255, 255, 255, 0) !important;
+}
+
 body, html {
     touch-action: none;
     margin: 0;
@@ -399,22 +406,32 @@ p{
 
 .description_w_input{
     width: 65%;
+    margin-left: 25px;
+}
+
+.description_w_input p{
+    margin: 0;
+    text-indent: 0;
+}
+
+.description_w_input span{
+    font-size: 25px;
 }
 
 .description_w_input label{
     font-size: 25px;
     font-weight: 900;
     color: rgb(0, 114, 192);
-    margin-left: 25px;
     margin-right: 25px;
 }
 
 .description_w_input input{
-    height: 20px;
+    height: 15px;
+    margin: 5px;
     padding: 15px;
     font-size: 25px;
-    border-radius: 15px;
-    width: 500px;
+    border-radius: 10px;
+    min-width: 200px;
 }
 
 
@@ -425,7 +442,7 @@ p{
 
 .incorrect {
     transition: all 0.3s;
-    background: rgb(255, 144, 144);
+    background-color: rgb(255, 144, 144);
 }
 
 

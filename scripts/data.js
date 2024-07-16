@@ -163,7 +163,7 @@ const data = {
         "test":[
             {"type": 2},
             {"description": "<b>Lorem ipsum dolor sit amet</b> consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores, fugit est ducimus dolor possimus officiis reiciendis nesciunt perferendis facilis? Beatae ea culpa a modi! Harum ex inventore laborum officiis ipsa. Soluta voluptate consequuntur a ex est qui. Earum dignissimos exercitationem aperiam dolore veniam deserunt beatae, blanditiis vero ea natus illum ipsum aliquid asperiores ab vel architecto iure aliquam error iusto? "},
-            {"test_with_text": "{=Бубльгум; =Баблгам; =бубльгум; =баблгам}"},
+            {"test_with_text": "{=Бубльгум, =Баблгам, =бубльгум, =баблгам}"},
             {"image": true, "image_path": "./content/test_image.png"},
         ],
     },
@@ -173,7 +173,7 @@ const data = {
         "test":[
             {"type": 2},
             {"description": "Тут пишем описание задания"},
-            {"test_with_text_2": "Россия {=священная} наша {=держава}"},
+            {"test_with_text_2": "Россия {=священная} наша {=держава}. Россия {=священная} наша {=держава}. Россия {=священная} наша {=держава}.Россия {=священная} наша {=держава}.Россия {=священная} наша {=держава}"},
             {"image": true, "image_path": "./content/test_image.png"},
         ],
     },
