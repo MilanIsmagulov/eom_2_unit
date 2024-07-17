@@ -1,6 +1,3 @@
-
-answerBtn.disabled = false;
-answerButton.classList.remove('disabled');
 removeAllEventListeners();
 
 function createTest(index) {
@@ -80,7 +77,6 @@ function checkAnswers(index) {
     const content = document.getElementById('dynamic-content');
     const inputs = content.querySelectorAll('input');
     let allCorrect = true;
-
     inputs.forEach(input => {
         const userAnswer = input.value.trim();
         const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(',').map(ans => ans.trim()) : [];
@@ -95,41 +91,39 @@ function checkAnswers(index) {
         }
     });
 
-    localStorage.setItem('answer_answer_form_index_' + index, JSON.stringify({ questionPlace: allCorrect }));
+    localStorage.setItem('answer_answer_form_' + index, JSON.stringify({ questionPlace: allCorrect }));
 
     document.getElementById('control_button_2').style.display = 'none';
     document.getElementById('control_button_3').style.display = 'inline-block';
 }
 
-function resetTest(index) {
-    createTest(index);
-}
+function resetTest() {
+    const answersButtons = document.querySelector('.answers_btn');
+    if (answersButtons) {
+        answersButtons.remove();
+    }
 
-// Функция для добавления новых слушателей событий
-function addEventListeners() {
-    document.getElementById('control_button_2').addEventListener('click', () => {
-        const index = `index_${currentPageIndex}`;
-        checkAnswers(index);
-    });
-
-    document.getElementById('control_button_3').addEventListener('click', () => {
-        const index = `index_${currentPageIndex}`;
-        resetTest(index);
-    });
-}
-
-function resetEventListeners() {
-    removeAllEventListeners();
-    addEventListeners();
-}
-
-function restartTest() {
-    // Initial call to create the test
     createTest(`index_${currentPageIndex}`);
-    resetEventListeners(); // Перезагрузить слушатели событий
     answerButton.classList.remove('hidden');
     restartButton.classList.add('hidden');
 }
 
-// Пример вызова restartTest для тестирования
-restartTest();
+document.getElementById('control_button_2').addEventListener('click', () => {
+    const index = `index_${currentPageIndex}`;
+    checkAnswers(index);
+});
+
+document.getElementById('control_button_3').addEventListener('click', () => {
+    const index = `index_${currentPageIndex}`;
+    resetTest(index);
+});
+
+createTest(`index_${currentPageIndex}`);
+
+backWardBtn.addEventListener('click', ()=>{
+    removeAllEventListeners();
+})
+
+nextBtn.addEventListener('click', ()=>{
+    removeAllEventListeners();
+})

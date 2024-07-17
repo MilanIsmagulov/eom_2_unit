@@ -99,4 +99,3 @@ function adjustContentWrapper() {
 
 window.addEventListener('load', adjustContentWrapper);
 window.addEventListener('resize', adjustContentWrapper);
-

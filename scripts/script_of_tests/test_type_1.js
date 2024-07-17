@@ -1,11 +1,11 @@
-answerButton.classList.add('gray_dis');
-answerButton.disabled = true;
-answerButton.classList.remove('disabled');
+// answerButton.classList.add('gray_dis');
+// answerButton.disabled = true;
+// answerButton.classList.remove('disabled');
 
-backWardBtn.classList.add('gray_dis')
-nextBtn.classList.add('gray_dis')
-backWardBtn.disabled = true;
-nextBtn.disabled = true;
+// backWardBtn.classList.add('gray_dis')
+// nextBtn.classList.add('gray_dis')
+// backWardBtn.disabled = true;
+// nextBtn.disabled = true;
 
 function createTest(index) {
     const test = data[index].test;
@@ -82,16 +82,16 @@ function blockInputs(){
     });
 }
 
-function handleAnswer() {
+function checkAnswers() {
     const form = contentDiv.querySelector('form');
     const correctAnswers = form.dataset.right.split(',').map(Number);
     const inputs = form.querySelectorAll('input');
 
     let allCorrect = true;
-    backWardBtn.classList.remove('gray_dis')
-    nextBtn.classList.remove('gray_dis')
-    backWardBtn.disabled = false;
-    nextBtn.disabled = false;
+    // backWardBtn.classList.remove('gray_dis')
+    // nextBtn.classList.remove('gray_dis')
+    // backWardBtn.disabled = false;
+    // nextBtn.disabled = false;
     inputs.forEach(input => {
         const answerDiv = input.parentElement;
         answerDiv.classList.remove('correct', 'incorrect');
@@ -114,28 +114,29 @@ function handleAnswer() {
     });
 
     localStorage.setItem('answer_' + form.id, JSON.stringify({ questionPlace: allCorrect }));
-    controlButton2.classList.add('hidden');
-    controlButton3.classList.remove('hidden');
+    answerButton.classList.add('hidden');
+    restartButton.classList.remove('hidden');
 }
 
-function resetTest() {
-    backWardBtn.classList.add('gray_dis')
-    nextBtn.classList.add('gray_dis')
-    backWardBtn.disabled = true;
-    nextBtn.disabled = true;
+function resetTest(){
     const answersButtons = document.querySelector('.answers_btn');
     if (answersButtons) {
         answersButtons.remove();
     }
 
     createTest(`index_${currentPageIndex}`);
-    controlButton2.classList.remove('hidden');
-    controlButton3.classList.add('hidden');
+    answerButton.classList.remove('hidden');
+    restartButton.classList.add('hidden');
+    answerButton.addEventListener('click', checkAnswers);
+    restartButton.addEventListener('click', resetTest);
 }
 
-controlButton2.addEventListener('click', handleAnswer);
-controlButton3.addEventListener('click', resetTest);
+function loadtest(){
+    removeAllEventListeners();
+    // Initialize the test
+    answerButton.addEventListener('click', handleAnswer);
+    restartButton.addEventListener('click', resetTest);
+    createTest(`index_${currentPageIndex}`);
+}
 
-// Initialize the test
-createTest(`index_${currentPageIndex}`);
-
+resetTest();

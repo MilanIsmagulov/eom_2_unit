@@ -1,27 +1,30 @@
-const testContainer = document.getElementById('test-container');
-// let currentTestIndex = 2; // Default test index, change as needed
 // Инициализация текущего индекса страницы
 let currentPageIndex = 1;
+let currentTestIndex = null;
 const answerButton = document.getElementById('control_button_2');
 const restartButton = document.getElementById('control_button_3');
-
-// const contentDiv = document.getElementById('content');
-const controlButton2 = document.getElementById('control_button_2');
-const controlButton3 = document.getElementById('control_button_3');
-let currentTestIndex = null;
-
-// Получение ссылки на элемент с id 'content'
+const testContainer = document.getElementById('test-container');
 const contentDiv = document.getElementById('content');
 const mainBody = document.getElementById('main_body_1');
 const backWardBtn = document.getElementById('control_button_1');
 const nextBtn = document.getElementById('control_button_4');
 const answerBtn = document.getElementById('control_button_2');
 
+
 function addFirstBtn(){
     const answerBtn = document.getElementById('control_button_2');
     const backWardBtn = document.getElementById('control_button_1');
     backWardBtn.classList.remove('hidden');
     answerBtn.classList.remove('hidden');
+}
+
+backWardBtn.classList.add('gray_dis')
+backWardBtn.disabled = true;
+
+function clearLocalStorage(){
+    if (currentPageIndex == 1){
+        localStorage.clear();
+    }  
 }
 
 
@@ -147,7 +150,6 @@ function displayPage(index) {
         spanOfDiscription.appendChild(subtitleButtonPop);
         spanOfDiscription.innerHTML += `${index}/${Object.keys(data).length}`
     }
-
     // Проверка наличия параграфов на странице
     if (pageData.hasOwnProperty('paragraph_1')) {
         // Перебор всех параграфов страницы
@@ -229,13 +231,6 @@ function displayPage(index) {
         bodyScroll.style.overflow = 'hidden';
         popupDiv.classList.remove('disabled');
         popupDiv.classList.add('enabled');
-        const backWardBtn = document.getElementById('control_button_1');
-        const nextBtn = document.getElementById('control_button_4');
-        backWardBtn.classList.add('gray_dis')
-        nextBtn.classList.add('gray_dis')
-        backWardBtn.disabled = true;
-        nextBtn.disabled = true;
-
         const closeBtn = document.querySelector('#close_popup_btn')
         closeBtn.disabled = false;
         closeBtn.classList.remove('gray_dis');
@@ -244,27 +239,9 @@ function displayPage(index) {
     function closePopUp(){
         const bodyScroll = document.getElementById('contentWrapper')
         bodyScroll.style.overflow = 'auto';
-        const backWardBtn = document.getElementById('control_button_1');
-        const nextBtn = document.getElementById('control_button_4');
-        if(!pageData.hasOwnProperty('test')){
-            backWardBtn.classList.remove('gray_dis')
-            nextBtn.classList.remove('gray_dis')
-            backWardBtn.disabled = false;
-            nextBtn.disabled = false;
-        }
-
         popupDiv.classList.add('disabled')
         popupDiv.classList.remove('enabled')
     }
-    function changeStatusBtn(){
-        backWardBtn.classList.remove('gray_dis')
-        nextBtn.classList.remove('gray_dis')
-        backWardBtn.disabled = false;
-        nextBtn.disabled = false;
-    }
-    
-    const closePopBtn2 = document.getElementById('close_popup_btn');
-    closePopBtn2.addEventListener('click', ()=> changeStatusBtn());
 
     document.getElementById('close_popup_btn').addEventListener('click', () => closePopUp());
     document.getElementById('popup_button_1').addEventListener('click', () => showPopUp());
@@ -354,7 +331,7 @@ function removeTestScripts() {
 function updatePage(step) {
     // Удаляем скрипты тестов перед переходом на новую страницу
     removeTestScripts();
-
+    clearLocalStorage();
     // Получение количества страниц
     const numOfPages = Object.keys(data).length;
     // Проверка, что новый индекс страницы в допустимых пределах
@@ -370,97 +347,31 @@ function updatePage(step) {
     closeBtn2.disabled = false;
     closeBtn2.classList.remove('gray_dis');
     closeBtn2.classList = 'close_btn';
-    // removeAllEventListeners();
+    if (currentPageIndex == Object.keys(data).length){
+        nextBtn.classList.add('gray_dis')
+        nextBtn.disabled = true;
+    }
+    if (currentPageIndex !== Object.keys(data).length){
+        nextBtn.classList.remove('gray_dis')
+        nextBtn.disabled = false;
+    }
+    if (currentPageIndex == 1){
+        backWardBtn.classList.add('gray_dis')
+        backWardBtn.disabled = true;
+    }
+    if (currentPageIndex !== 1){
+        backWardBtn.classList.remove('gray_dis')
+        backWardBtn.disabled = false;
+    }
 }
 
 // Добавление обработчиков событий для кнопок навигации
 document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
 document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
 
+
+
 // Начальное отображение первой страницы и маркеров
 displayPage(currentPageIndex);
 createMarkers();
 
-// // Функция для удаления скрипта тестов по id
-// function removeTestScripts() {
-//     const existingScript = document.getElementById('test-script');
-//     if (existingScript) {
-//         existingScript.remove();
-//     }
-// }
-
-// // Обновленная функция для обновления страницы
-// function updatePage(step) {
-//     // Удаляем скрипты тестов перед переходом на новую страницу
-//     removeTestScripts();
-
-//     // Получение количества страниц
-//     const numOfPages = Object.keys(data).length;
-//     // Проверка, что новый индекс страницы в допустимых пределах
-//     if ((currentPageIndex + step) >= 1 && (currentPageIndex + step) <= numOfPages) {
-//         // Обновление индекса текущей страницы
-//         currentPageIndex += step;
-//         // Отображение новой страницы
-//         displayPage(currentPageIndex);
-//         // Обновление маркеров
-//         createMarkers();
-//     }
-//     const closeBtn2 = document.querySelector('#close_popup_btn');
-//     closeBtn2.disabled = false;
-//     closeBtn2.classList.remove('gray_dis');
-//     closeBtn2.classList = 'close_btn';
-// }
-
-// // Добавление обработчиков событий для кнопок навигации
-// document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
-// document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
-
-// // Начальное отображение первой страницы и маркеров
-// displayPage(currentPageIndex);
-// createMarkers();
-
-
-// __________________________
-
-// else if (pageData.hasOwnProperty('test')) {
-//     const answerBtn = document.getElementById('control_button_2');
-//     answerBtn.classList.remove('hidden');
-
-//     function replaceScript(src, id) {
-//         const existingScript = document.getElementById(id);
-//         if (existingScript) {
-//             existingScript.remove();
-//         }
-
-//         const script = document.createElement('script');
-//         script.src = src;
-//         script.defer = true;
-//         script.id = id;
-//         document.head.appendChild(script);
-//     }
-
-//     pageData.test.forEach(testItem => {
-//         if (testItem.hasOwnProperty('type')) {
-//             switch (testItem.type) {
-//                 case 1:
-//                     replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
-//                     break;
-//                 case 2:
-//                     replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
-//                     break;
-//                 case 3:
-//                     replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
-//                     break;
-//                 case 4:
-//                     replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
-//                     break;
-//                 case 5:
-//                     replaceScript('./scripts/script_of_tests/test_type_5.js', 'test-script');
-//                     break;
-//                 default:
-//                     console.log('Неизвестный тип теста');
-//                     break;
-//             }
-//         }
-//     });
-// } 
