@@ -227,6 +227,7 @@ function displayPage(index) {
 
     function showPopUp(){
         // Блокируем скролл страницы
+        logicOfButtons();
         const bodyScroll = document.getElementById('contentWrapper')
         bodyScroll.style.overflow = 'hidden';
         popupDiv.classList.remove('disabled');
@@ -237,6 +238,7 @@ function displayPage(index) {
         closeBtn.classList = 'close_btn';
     }
     function closePopUp(){
+        logicOfButtons();
         const bodyScroll = document.getElementById('contentWrapper')
         bodyScroll.style.overflow = 'auto';
         popupDiv.classList.add('disabled')
@@ -246,7 +248,22 @@ function displayPage(index) {
     document.getElementById('close_popup_btn').addEventListener('click', () => closePopUp());
     document.getElementById('popup_button_1').addEventListener('click', () => showPopUp());
 
+    function logicOfButtons(){
+        const modalWindow = document.getElementById('popup_window_id')
+
+        if (!modalWindow.classList.contains('disabled') && !pageData.hasOwnProperty('test')){
+            console.log('Модальное окно закрыто и мы на странице теории!')
+        } else if (!modalWindow.classList.contains('enabled') && !pageData.hasOwnProperty('test')){
+            console.log('Модальное окно открыто и мы на странице теории!')
+        } else if (!modalWindow.classList.contains('disabled') && pageData.hasOwnProperty('test')){
+            console.log('Модальное окно закрыто и мы на странице теста!')
+        } else if (!modalWindow.classList.contains('enabled') && pageData.hasOwnProperty('test')){
+            console.log('Модальное окно открыто и мы на странице теста!')
+        }
+    }
 }
+
+
 
 // const stepMarkerPlace = document.getElementsByClassName('step_marker')
 // Функция для создания маркеров страниц
@@ -281,18 +298,19 @@ function removeAllEventListeners() {
     let newControlButton2 = oldControlButton2.cloneNode(true);
     oldControlButton2.parentNode.replaceChild(newControlButton2, oldControlButton2);
 
-    let oldControlButton3 = document.getElementById('control_button_3');
-    let newControlButton3 = oldControlButton3.cloneNode(true);
-    oldControlButton3.parentNode.replaceChild(newControlButton3, oldControlButton3);
     setTimeout(() => {
         document.getElementById('control_button_2').addEventListener('click', () => {
             const index = `index_${currentPageIndex}`;
             checkAnswers(index);
+            document.getElementById('control_button_2').style.display = 'none'
+            document.getElementById('control_button_3').style.display = 'block'
         });
         
         document.getElementById('control_button_3').addEventListener('click', () => {
             const index = `index_${currentPageIndex}`;
             resetTest(index);
+            answerButton.classList.remove('hidden');
+            restartButton.classList.add('hidden');
         });
     
     }, 500);
@@ -369,6 +387,14 @@ function updatePage(step) {
 document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
 document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
 
+document.getElementById('control_button_3').addEventListener('click', () => {
+    answerButton.classList.remove('hidden');
+    restartButton.classList.add('hidden');
+    document.getElementById('control_button_2').style.display = 'block'
+    document.getElementById('control_button_3').style.display = 'none'
+    answerButton.addEventListener('click', checkAnswers);
+    restartButton.addEventListener('click', resetTest);
+})
 
 
 // Начальное отображение первой страницы и маркеров

@@ -1,5 +1,14 @@
 removeAllEventListeners();
 
+// answerButton.classList.add('gray_dis');
+// answerButton.disabled = true;
+// answerButton.classList.remove('disabled');
+
+// backWardBtn.classList.add('gray_dis')
+// nextBtn.classList.add('gray_dis')
+// backWardBtn.disabled = true;
+// nextBtn.disabled = true;
+
 function createTest(index) {
     const content = document.getElementById('content');
     let dynamicContainer = document.getElementById('dynamic-content');
@@ -77,6 +86,10 @@ function checkAnswers(index) {
     const content = document.getElementById('dynamic-content');
     const inputs = content.querySelectorAll('input');
     let allCorrect = true;
+    // backWardBtn.classList.remove('gray_dis')
+    // nextBtn.classList.remove('gray_dis')
+    // backWardBtn.disabled = false;
+    // nextBtn.disabled = false;
     inputs.forEach(input => {
         const userAnswer = input.value.trim();
         const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(',').map(ans => ans.trim()) : [];
@@ -102,10 +115,15 @@ function resetTest() {
     if (answersButtons) {
         answersButtons.remove();
     }
-
+    // backWardBtn.classList.add('gray_dis')
+    // nextBtn.classList.add('gray_dis')
+    // backWardBtn.disabled = true;
+    // nextBtn.disabled = true;
     createTest(`index_${currentPageIndex}`);
     answerButton.classList.remove('hidden');
     restartButton.classList.add('hidden');
+    answerButton.addEventListener('click', checkAnswers);
+    restartButton.addEventListener('click', resetTest);
 }
 
 document.getElementById('control_button_2').addEventListener('click', () => {
@@ -122,8 +140,10 @@ createTest(`index_${currentPageIndex}`);
 
 backWardBtn.addEventListener('click', ()=>{
     removeAllEventListeners();
+    resetTest();
 })
 
 nextBtn.addEventListener('click', ()=>{
     removeAllEventListeners();
+    resetTest();
 })

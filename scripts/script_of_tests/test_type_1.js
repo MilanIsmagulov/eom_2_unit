@@ -123,7 +123,10 @@ function resetTest(){
     if (answersButtons) {
         answersButtons.remove();
     }
-
+    // backWardBtn.classList.add('gray_dis')
+    // nextBtn.classList.add('gray_dis')
+    // backWardBtn.disabled = true;
+    // nextBtn.disabled = true;
     createTest(`index_${currentPageIndex}`);
     answerButton.classList.remove('hidden');
     restartButton.classList.add('hidden');
@@ -134,6 +137,7 @@ function resetTest(){
 function loadtest(){
     removeAllEventListeners();
     // Initialize the test
+    resetTest();
     answerButton.addEventListener('click', handleAnswer);
     restartButton.addEventListener('click', resetTest);
     createTest(`index_${currentPageIndex}`);
