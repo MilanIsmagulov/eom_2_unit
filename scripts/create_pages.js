@@ -260,6 +260,11 @@ function displayPage(index) {
         } else if (!modalWindow.classList.contains('enabled') && pageData.hasOwnProperty('test')){
             console.log('Модальное окно открыто и мы на странице теста!')
         }
+        if (answerBtn.classList.contains('gray_dis')){
+            console.log('Кнопка ответа заблокированна!!!')
+        } else {
+            console.log('Кнопка ответа разблокированна!!!')
+        }
     }
 }
 
@@ -381,6 +386,7 @@ function updatePage(step) {
         backWardBtn.classList.remove('gray_dis')
         backWardBtn.disabled = false;
     }
+
 }
 
 // Добавление обработчиков событий для кнопок навигации
