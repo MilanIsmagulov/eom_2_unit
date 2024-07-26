@@ -18,7 +18,7 @@ function addFirstBtn(){
     answerBtn.classList.remove('hidden');
 }
 
-backWardBtn.classList.add('gray_dis')
+backWardBtn.classList.add('gray_dis');
 backWardBtn.disabled = true;
 
 function clearLocalStorage(){
@@ -30,9 +30,9 @@ function clearLocalStorage(){
 
 // Функция для создания блока с текстом и изображением
 function createTextWithImage(paragraph) {
-    
+    showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
-    answerBtn.classList.add('hidden');
+    answerBtn.classList.add('gray_dis');
     const reloadBtn = document.getElementById('control_button_3');
     reloadBtn.classList.add('hidden');
     // Создание контейнера
@@ -69,8 +69,9 @@ function createTextWithImage(paragraph) {
 
 // Функция для создания блока только с изображением
 function createOnlyImage(paragraph) {
+    showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
-    answerBtn.classList.add('hidden');
+    answerBtn.classList.add('gray_dis');
     const reloadBtn = document.getElementById('control_button_3');
     reloadBtn.classList.add('hidden');
     // Создание контейнера
@@ -98,8 +99,9 @@ function createOnlyImage(paragraph) {
 
 // Функция для создания блока только с текстом
 function createPlainText(paragraph) {
+    showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
-    answerBtn.classList.add('hidden');
+    answerBtn.classList.add('gray_dis');
     const reloadBtn = document.getElementById('control_button_3');
     reloadBtn.classList.add('hidden');
     // Создание контейнера
@@ -180,7 +182,7 @@ function displayPage(index) {
                         replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 2:
-                        replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
+                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 3:
                         replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
@@ -299,26 +301,8 @@ function createMarkers() {
 
 // Удаление всех обработчиков событий с кнопок
 function removeAllEventListeners() {
-    let oldControlButton2 = document.getElementById('control_button_2');
-    let newControlButton2 = oldControlButton2.cloneNode(true);
-    oldControlButton2.parentNode.replaceChild(newControlButton2, oldControlButton2);
-
-    setTimeout(() => {
-        document.getElementById('control_button_2').addEventListener('click', () => {
-            const index = `index_${currentPageIndex}`;
-            checkAnswers(index);
-            document.getElementById('control_button_2').style.display = 'none'
-            document.getElementById('control_button_3').style.display = 'block'
-        });
-        
-        document.getElementById('control_button_3').addEventListener('click', () => {
-            const index = `index_${currentPageIndex}`;
-            resetTest(index);
-            answerButton.classList.remove('hidden');
-            restartButton.classList.add('hidden');
-        });
-    
-    }, 500);
+    document.getElementById('control_button_2').removeEventListener('click', checkAnswers);
+    document.getElementById('control_button_3').removeEventListener('click', resetTest);
 }
 
 // Очистка контента страницы перед загрузкой нового теста
@@ -352,6 +336,8 @@ function removeTestScripts() {
 
 // Обновленная функция для обновления страницы
 function updatePage(step) {
+
+    showAnswerBtn();
     // Удаляем скрипты тестов перед переходом на новую страницу
     removeTestScripts();
     clearLocalStorage();
@@ -393,17 +379,6 @@ function updatePage(step) {
 document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
 document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
 
-document.getElementById('control_button_3').addEventListener('click', () => {
-    answerButton.classList.remove('hidden');
-    restartButton.classList.add('hidden');
-    document.getElementById('control_button_2').style.display = 'block'
-    document.getElementById('control_button_3').style.display = 'none'
-    answerButton.addEventListener('click', checkAnswers);
-    restartButton.addEventListener('click', resetTest);
-})
-
-
 // Начальное отображение первой страницы и маркеров
 displayPage(currentPageIndex);
 createMarkers();
-

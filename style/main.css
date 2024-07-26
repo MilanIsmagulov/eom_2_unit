@@ -200,6 +200,7 @@ p{
 }
 
 .subtitle_wrapper{
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;

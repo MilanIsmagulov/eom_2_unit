@@ -1,15 +1,7 @@
 removeAllEventListeners();
 
-// answerButton.classList.add('gray_dis');
-// answerButton.disabled = true;
-// answerButton.classList.remove('disabled');
-
-// backWardBtn.classList.add('gray_dis')
-// nextBtn.classList.add('gray_dis')
-// backWardBtn.disabled = true;
-// nextBtn.disabled = true;
-
 function createTest(index) {
+    removeAllEventListeners();
     const content = document.getElementById('content');
     let dynamicContainer = document.getElementById('dynamic-content');
 
@@ -80,16 +72,41 @@ function createTest(index) {
 
     document.getElementById('control_button_2').style.display = 'inline-block';
     document.getElementById('control_button_3').style.display = 'none';
+
+    if (testWithText){
+        const inputField = document.querySelector('#test_type_2');
+        inputField.addEventListener('input', (event) => {
+    
+            console.log('Current value:', event.target.value.length);
+            if (event.target.value.length > 0){
+                answerButton.classList.remove('gray_dis');
+                answerButton.disabled = false;
+            }
+        });
+    }
+
+    if(testWithText2){
+        const gapElements = document.querySelectorAll('.gap');
+        gapElements.forEach((element) => {
+            element.addEventListener('input', (event) => {
+                
+                if (event.target.value.length > 0) {
+                    answerButton.classList.remove('gray_dis');
+                    answerButton.disabled = false;
+                } else {
+                    answerButton.classList.add('gray_dis');
+                    answerButton.disabled = true;
+                }
+            });
+        });
+    }
 }
 
 function checkAnswers(index) {
     const content = document.getElementById('dynamic-content');
     const inputs = content.querySelectorAll('input');
     let allCorrect = true;
-    // backWardBtn.classList.remove('gray_dis')
-    // nextBtn.classList.remove('gray_dis')
-    // backWardBtn.disabled = false;
-    // nextBtn.disabled = false;
+
     inputs.forEach(input => {
         const userAnswer = input.value.trim();
         const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(',').map(ans => ans.trim()) : [];
@@ -104,21 +121,21 @@ function checkAnswers(index) {
         }
     });
 
-    localStorage.setItem('answer_answer_form_' + index, JSON.stringify({ questionPlace: allCorrect }));
+    localStorage.setItem('answer_' + index, JSON.stringify({ questionPlace: allCorrect }));
 
     document.getElementById('control_button_2').style.display = 'none';
     document.getElementById('control_button_3').style.display = 'inline-block';
 }
 
 function resetTest() {
+
     const answersButtons = document.querySelector('.answers_btn');
     if (answersButtons) {
         answersButtons.remove();
     }
-    // backWardBtn.classList.add('gray_dis')
-    // nextBtn.classList.add('gray_dis')
-    // backWardBtn.disabled = true;
-    // nextBtn.disabled = true;
+    answerButton.classList.add('gray_dis');
+    answerButton.disabled = true;
+
     createTest(`index_${currentPageIndex}`);
     answerButton.classList.remove('hidden');
     restartButton.classList.add('hidden');
@@ -126,24 +143,8 @@ function resetTest() {
     restartButton.addEventListener('click', resetTest);
 }
 
-document.getElementById('control_button_2').addEventListener('click', () => {
-    const index = `index_${currentPageIndex}`;
-    checkAnswers(index);
-});
-
-document.getElementById('control_button_3').addEventListener('click', () => {
-    const index = `index_${currentPageIndex}`;
-    resetTest(index);
-});
-
 createTest(`index_${currentPageIndex}`);
 
-backWardBtn.addEventListener('click', ()=>{
-    removeAllEventListeners();
-    resetTest();
-})
 
-nextBtn.addEventListener('click', ()=>{
-    removeAllEventListeners();
-    resetTest();
-})
+
+
