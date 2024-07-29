@@ -336,8 +336,8 @@ function removeTestScripts() {
 
 // Обновленная функция для обновления страницы
 function updatePage(step) {
-
     showAnswerBtn();
+    
     // Удаляем скрипты тестов перед переходом на новую страницу
     removeTestScripts();
     clearLocalStorage();
@@ -373,6 +373,12 @@ function updatePage(step) {
         backWardBtn.disabled = false;
     }
 
+}
+
+function showAnswerBtn(){
+    answerButton.classList.add('gray_dis')
+    answerButton.disabled = true;
+    restartButton.classList.add('hidden')
 }
 
 // Добавление обработчиков событий для кнопок навигации
