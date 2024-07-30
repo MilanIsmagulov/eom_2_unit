@@ -181,7 +181,23 @@ const data = {
         "subtitle": "subtitle 3333",
         "step_of_popup": "step 2",
         "test":[
-            {"type": 5},
+            {"type": 3},
+           
+            {"answers": [
+                "First Answer",
+                "Second Answer",
+                "Third dfgdfgdg Answer",
+                "Thirdwqwqw Answer",
+                "Thirdhgghghh Answer",
+                "Four Answer"
+            ]}
+        ],
+    },
+    "index_14":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 3},
            
             {"answers": [
                 "First Answer",
@@ -191,7 +207,7 @@ const data = {
             ]}
         ],
     },
-    "index_14":{
+    "index_15":{
         "subtitle": "Тут типа результаты",
         "step_of_popup": "Тут типа результаты",
         "result":[]

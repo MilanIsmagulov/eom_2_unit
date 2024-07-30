@@ -179,13 +179,15 @@ function displayPage(index) {
             if (testItem.hasOwnProperty('type')) {
                 switch (testItem.type) {
                     case 1:
-                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
+                        console.log('Неизвестный тип теста');
+                        //replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 2:
-                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
+                        console.log('Неизвестный тип теста');
+                        //replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 3:
-                        replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
+                        replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
                         break;
                     case 4:
                         replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');

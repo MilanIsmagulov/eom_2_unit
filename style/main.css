@@ -446,6 +446,71 @@ p{
     background-color: rgb(255, 144, 144);
 }
 
+.dynamic-content{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    justify-content: center;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.numbers > span {
+    display: flex;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    font-weight: 900;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 40px;
+    background-color: rgb(0, 114, 192);
+    border: 0px solid slateblue;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    padding: 5px;
+}
+
+.item, .item2 {
+    list-style-image: none;
+    margin: 8px;
+    padding: 18px;
+    padding-left: 25px;
+    cursor: grab;
+}
+
+ul li div{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 25px;
+    font-weight: 600;
+    font-size: 20px;
+    border: solid 0px #00000080;
+    width: 650px;
+    margin: 10px;
+    height: 45px;
+    border-radius: 12px;
+}
+
+ul li{
+    transition: all 0.3s;
+    padding-left: 25px;
+    font-weight: 600;
+    font-size: 20px;
+    border: solid 0px #00000080;
+    border-radius: 12px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+ul li::marker{
+    font-size: 0;
+}
 
 @media (max-width: 1000px) {
     .answer_form_img{

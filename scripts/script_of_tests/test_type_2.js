@@ -1,150 +1,171 @@
-removeAllEventListeners();
+// Access answers array from the data object
+const anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
+answerButton.classList.remove('gray_dis');
+answerButton.disabled = false;
+const dynamicContainer = document.createElement('div');
+dynamicContainer.className = 'dynamic-content';
+const dragObj = document.createElement('div');
+dragObj.className = 'numbers';
+contentDiv.appendChild(dynamicContainer)
+dynamicContainer.appendChild(dragObj)
+localStorage.removeItem('data1')
 
-function createTest(index) {
-    removeAllEventListeners();
-    const content = document.getElementById('content');
-    let dynamicContainer = document.getElementById('dynamic-content');
+const list = document.createElement('ul');
+list.className = 'list'
+list.id = 'list';
+dynamicContainer.appendChild(list)
 
-    if (!dynamicContainer) {
-        dynamicContainer = document.createElement('div');
-        dynamicContainer.id = 'dynamic-content';
-        content.appendChild(dynamicContainer);
-    } else {
-        dynamicContainer.innerHTML = ''; // Clear only dynamic content
-    }
+let storeItems = [];
+let listItems = [];
+let dragStartIndex;
 
-    const testData = data[index];
-    const test = testData.test;
+init();
 
-    const description = test.find(item => item.description).description;
-    const imageInfo = test.find(item => item.image !== undefined);
-    const testWithText = test.find(item => item.test_with_text);
-    const testWithText2 = test.find(item => item.test_with_text_2);
-
-    if (imageInfo.image) {
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'image_test_type_2';
-        const img = document.createElement('img');
-        img.src = imageInfo.image_path;
-        img.alt = 'Проверьте image_path';
-        imageDiv.appendChild(img);
-        dynamicContainer.appendChild(imageDiv);
-    }
-
-    const descriptionDiv = document.createElement('div');
-    descriptionDiv.className = 'description_w_input';
-    const p = document.createElement('p');
-    p.innerHTML = description;
-    descriptionDiv.appendChild(p);
-
-    if (testWithText) {
-        const label = document.createElement('label');
-        label.htmlFor = 'test_type_2';
-        label.textContent = 'Введите ответ:';
-        descriptionDiv.appendChild(label);
-
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.id = 'test_type_2';
-        input.setAttribute('autocomplete', 'off');
-        input.name = 'test_type_2';
-        input.dataset.correctAnswer = testWithText.test_with_text.replace(/[\{\}=]/g, '').split(';').map(ans => ans.trim()).join(';');
-        descriptionDiv.appendChild(input);
-    } else if (testWithText2) {
-        const parts = testWithText2.test_with_text_2.split(/\{=.*?\}/);
-        const matches = [...testWithText2.test_with_text_2.matchAll(/\{=(.*?)\}/g)];
-        parts.forEach((part, index) => {
-            const span = document.createElement('span');
-            span.textContent = part;
-            descriptionDiv.appendChild(span);
-            if (matches[index]) {
-                const input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'gap';
-                input.setAttribute('autocomplete', 'off');
-                input.dataset.correctAnswer = matches[index][1];
-                descriptionDiv.appendChild(input);
-            }
-        });
-    }
-
-    dynamicContainer.appendChild(descriptionDiv);
-
-    document.getElementById('control_button_2').style.display = 'inline-block';
-    document.getElementById('control_button_3').style.display = 'none';
-
-    if (testWithText){
-        const inputField = document.querySelector('#test_type_2');
-        inputField.addEventListener('input', (event) => {
-    
-            console.log('Current value:', event.target.value.length);
-            if (event.target.value.length > 0){
-                answerButton.classList.remove('gray_dis');
-                answerButton.disabled = false;
-            }
-        });
-    }
-
-    if(testWithText2){
-        const gapElements = document.querySelectorAll('.gap');
-        gapElements.forEach((element) => {
-            element.addEventListener('input', (event) => {
-                
-                if (event.target.value.length > 0) {
-                    answerButton.classList.remove('gray_dis');
-                    answerButton.disabled = false;
-                } else {
-                    answerButton.classList.add('gray_dis');
-                    answerButton.disabled = true;
-                }
-            });
-        });
-    }
+function init() {
+    localStorage.getItem('data1') ? loadList() : createList();
 }
 
-function checkAnswers(index) {
-    const content = document.getElementById('dynamic-content');
-    const inputs = content.querySelectorAll('input');
-    let allCorrect = true;
+function createList() {
+    [...anwserArr]
+    .map(a => ({ value: a, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
+    .forEach((item, index) => {
+        const listItem = document.createElement('li');
 
-    inputs.forEach(input => {
-        const userAnswer = input.value.trim();
-        const correctAnswers = input.dataset.correctAnswer ? input.dataset.correctAnswer.split(',').map(ans => ans.trim()) : [];
+        listItem.setAttribute('id', index);
+        listItem.innerHTML = `<div class="item" draggable="true">${item}</div>`;
 
-        if (correctAnswers.includes(userAnswer)) {
-            input.classList.add('correct');
-            input.classList.remove('incorrect');
-        } else {
-            input.classList.add('incorrect');
-            input.classList.remove('correct');
-            allCorrect = false;
-        }
+        var num = document.createElement('span');
+        num.setAttribute('class', 'number');
+        num.innerHTML = `${index+1}`;
+        document.getElementsByClassName("numbers")[0].appendChild(num);
+
+        listItems.push(listItem);
+        list.appendChild(listItem);
     });
 
-    localStorage.setItem('answer_' + index, JSON.stringify({ questionPlace: allCorrect }));
 
-    document.getElementById('control_button_2').style.display = 'none';
-    document.getElementById('control_button_3').style.display = 'inline-block';
-}
-
-function resetTest() {
-
-    const answersButtons = document.querySelector('.answers_btn');
-    if (answersButtons) {
-        answersButtons.remove();
+    for (i in listItems) {
+        storeItems.push(i);
     }
-    answerButton.classList.add('gray_dis');
-    answerButton.disabled = true;
 
-    createTest(`index_${currentPageIndex}`);
-    answerButton.classList.remove('hidden');
-    restartButton.classList.add('hidden');
-    answerButton.addEventListener('click', checkAnswers);
-    restartButton.addEventListener('click', resetTest);
+    localStorage.setItem('data1', JSON.stringify(storeItems));
+
+    // addEventListeners();
 }
 
-createTest(`index_${currentPageIndex}`);
+
+function loadList() {
+    fromStore();
+
+    [...storeItems]
+    .map(a => ({ value: a, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
+    .forEach((item, index) => {
+        const listItem = document.createElement('li');
+        listItem.setAttribute('id', index);
+        listItem.innerHTML = `<span class="number">${index + 1}</span><div class="item" draggable="true">${item}</div>`;
+        listItems.push(listItem);
+        list.appendChild(listItem);
+    });
+
+    [...storeItems]
+    .map(a => ({ value: a, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value)
+    .forEach((item, index) => {
+        const listItem = document.createElement('li');
+        listItem.setAttribute('id', index);
+        listItem.innerHTML = `<span class="number">${index + 1}</span><div class="item" draggable="true">${item}</div>`;
+        listItems.push(listItem);
+        list.appendChild(listItem);
+    });
+    // addEventListeners()
+}
 
 
+function toStore() {
+    localStorage.setItem('data1', JSON.stringify(storeItems));
+}
 
 
+function fromStore() {
+    storeItems = JSON.parse(localStorage.getItem('data1'));
+}
+
+
+function dragStart() {
+    dragStartIndex = +this.closest('li').getAttribute('id');
+}
+
+function dragEnter() {
+    this.classList.add('over');
+}
+
+function dragLeave() {
+    this.classList.remove('over');
+}
+
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function dragDrop() {
+    const dragEndIndex = +this.getAttribute('id');
+    swapItems(dragStartIndex, dragEndIndex);
+
+    this.classList.remove('over');
+}
+
+
+function swapItems(fromIndex, toIndex) {
+    const itemOne = listItems[fromIndex].querySelector('.item');
+    const itemTwo = listItems[toIndex].querySelector('.item');
+
+    listItems[fromIndex].appendChild(itemTwo);
+    listItems[toIndex].appendChild(itemOne);
+
+    storeItems = []
+    for (i of listItems) {
+        
+        storeItems.push(i.children[1].innerText);
+    }
+    localStorage.setItem('data1', JSON.stringify(storeItems));
+}
+
+function getCurrentList() {
+    
+}
+
+
+function checkAnwser() {
+    listItems = document.getElementsByClassName("list");
+    let i = 0;
+
+    for (item of listItems[0].children){
+        itemText = item.getElementsByTagName('div')[0].innerText;
+        let index = i;
+
+        if (itemText !== anwserArr[index]) {
+            item.classList.add('incorrect')
+            localStorage.setItem('answer_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: false}));
+
+        } else {
+            localStorage.setItem('answer_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: true}));
+            item.classList.remove('incorrect')
+            item.classList.add('correct')
+
+        }
+        i++;
+    }
+}
+
+var el = document.getElementById('list');
+
+var sortable = new Sortable(el, {
+    swap: true,
+    swapClass: "highlight",
+    animation: 150,
+});
