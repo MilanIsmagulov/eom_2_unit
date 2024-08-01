@@ -1,23 +1,26 @@
 // Access answers array from the data object
-const anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
+
+var anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
 answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
-const dynamicContainer = document.createElement('div');
+restartButton.classList.remove('hidden');
+restartButton.disabled = false;
+var dynamicContainer = document.createElement('div');
 dynamicContainer.className = 'dynamic-content';
-const dragObj = document.createElement('div');
+var dragObj = document.createElement('div');
 dragObj.className = 'numbers';
 contentDiv.appendChild(dynamicContainer)
 dynamicContainer.appendChild(dragObj)
 localStorage.removeItem('data1')
 
-const list = document.createElement('ul');
+var list = document.createElement('ul');
 list.className = 'list'
 list.id = 'list';
 dynamicContainer.appendChild(list)
 
-let storeItems = [];
-let listItems = [];
-let dragStartIndex;
+var storeItems = [];
+var listItems = [];
+var dragStartIndex;
 
 init();
 
@@ -32,7 +35,7 @@ function createList() {
     .map(a => a.value)
     .forEach((item, index) => {
         const listItem = document.createElement('li');
-
+        listItem.draggable = true;
         listItem.setAttribute('id', index);
         listItem.innerHTML = `<div class="item" draggable="true">${item}</div>`;
 
@@ -65,6 +68,7 @@ function loadList() {
     .map(a => a.value)
     .forEach((item, index) => {
         const listItem = document.createElement('li');
+        listItem.draggable = true;
         listItem.setAttribute('id', index);
         listItem.innerHTML = `<span class="number">${index + 1}</span><div class="item" draggable="true">${item}</div>`;
         listItems.push(listItem);
@@ -77,12 +81,12 @@ function loadList() {
     .map(a => a.value)
     .forEach((item, index) => {
         const listItem = document.createElement('li');
+        listItem.draggable = true;
         listItem.setAttribute('id', index);
         listItem.innerHTML = `<span class="number">${index + 1}</span><div class="item" draggable="true">${item}</div>`;
         listItems.push(listItem);
         list.appendChild(listItem);
     });
-    // addEventListeners()
 }
 
 
@@ -135,11 +139,6 @@ function swapItems(fromIndex, toIndex) {
     localStorage.setItem('data1', JSON.stringify(storeItems));
 }
 
-function getCurrentList() {
-    
-}
-
-
 function checkAnwser() {
     listItems = document.getElementsByClassName("list");
     let i = 0;
@@ -150,16 +149,20 @@ function checkAnwser() {
 
         if (itemText !== anwserArr[index]) {
             item.classList.add('incorrect')
-            localStorage.setItem('answer_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: false}));
+            localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: false}));
 
         } else {
-            localStorage.setItem('answer_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: true}));
+            localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: true}));
             item.classList.remove('incorrect')
             item.classList.add('correct')
 
         }
         i++;
     }
+}
+
+function resetDynamicContainer() {
+    setTimeout(updatePage(0), 500)
 }
 
 var el = document.getElementById('list');

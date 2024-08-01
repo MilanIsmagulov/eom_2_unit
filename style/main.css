@@ -484,11 +484,14 @@ p{
     cursor: grab;
 }
 
+
+
 ul li div{
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding-left: 25px;
+    background-color: rgba(250, 250, 250, 0);
     font-weight: 600;
     font-size: 20px;
     border: solid 0px #00000080;
@@ -496,11 +499,11 @@ ul li div{
     margin: 10px;
     height: 45px;
     border-radius: 12px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0);
 }
 
 ul li{
     transition: all 0.3s;
-    padding-left: 25px;
     font-weight: 600;
     font-size: 20px;
     border: solid 0px #00000080;

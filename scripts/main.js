@@ -85,17 +85,26 @@ function shortenTitle(element, maxLength) {
     }
 }
 
-titleUpper.innerHTML = title_of_eom;
-blackHeader.innerHTML = title_of_eom;
+async function waitTitle(){
+    try{
+        await title_of_eom;
+        titleUpper.innerHTML = title_of_eom;
+        blackHeader.innerHTML = title_of_eom;
+    } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+    }
+}
 
 function adjustContentWrapper() {
     const headerHeight = document.getElementById('header').offsetHeight;
     const footerHeight = document.getElementById('footer').offsetHeight;
     const contentWrapper = document.getElementById('contentWrapper');
 
-    contentWrapper.style.paddingTop = headerHeight + 15 + 'px';
+    contentWrapper.style.paddingTop = headerHeight + 25 + 'px';
     contentWrapper.style.paddingBottom = footerHeight + 50 + 'px';
 }
 
 window.addEventListener('load', adjustContentWrapper);
 window.addEventListener('resize', adjustContentWrapper);
+
+waitTitle();
