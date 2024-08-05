@@ -3,20 +3,20 @@
 var anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
 answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
-restartButton.classList.remove('hidden');
+restartButton.classList.add('hidden');
 restartButton.disabled = false;
 var dynamicContainer = document.createElement('div');
 dynamicContainer.className = 'dynamic-content';
 var dragObj = document.createElement('div');
 dragObj.className = 'numbers';
-contentDiv.appendChild(dynamicContainer)
-dynamicContainer.appendChild(dragObj)
-localStorage.removeItem('data1')
+contentDiv.appendChild(dynamicContainer);
+dynamicContainer.appendChild(dragObj);
+localStorage.removeItem('data1');
 
 var list = document.createElement('ul');
-list.className = 'list'
+list.className = 'list';
 list.id = 'list';
-dynamicContainer.appendChild(list)
+dynamicContainer.appendChild(list);
 
 var storeItems = [];
 var listItems = [];
@@ -54,8 +54,6 @@ function createList() {
     }
 
     localStorage.setItem('data1', JSON.stringify(storeItems));
-
-    // addEventListeners();
 }
 
 
@@ -131,7 +129,7 @@ function swapItems(fromIndex, toIndex) {
     listItems[fromIndex].appendChild(itemTwo);
     listItems[toIndex].appendChild(itemOne);
 
-    storeItems = []
+    storeItems = [];
     for (i of listItems) {
         
         storeItems.push(i.children[1].innerText);
@@ -148,27 +146,31 @@ function checkAnwser() {
         let index = i;
 
         if (itemText !== anwserArr[index]) {
-            item.classList.add('incorrect')
+            item.classList.add('incorrect');
+            answerButton.classList.add('hidden');
+            restartButton.classList.remove('hidden');
             localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: false}));
 
         } else {
+            item.classList.add('correct');
+            item.classList.remove('incorrect');
+            answerButton.classList.add('hidden');
+            restartButton.classList.remove('hidden');
             localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: true}));
-            item.classList.remove('incorrect')
-            item.classList.add('correct')
-
         }
         i++;
     }
 }
 
 function resetDynamicContainer() {
-    setTimeout(updatePage(0), 500)
+    setTimeout(updatePage(0), 500);
 }
 
 var el = document.getElementById('list');
 
 var sortable = new Sortable(el, {
-    swap: true,
-    swapClass: "highlight",
+    multiDrag: true,
+    selectedClass: 'selected',
+    fallbackTolerance: 3,
     animation: 150,
 });

@@ -487,6 +487,7 @@ p{
 
 
 ul li div{
+    transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: flex-start;
