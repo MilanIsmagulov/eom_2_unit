@@ -169,8 +169,7 @@ function resetDynamicContainer() {
 var el = document.getElementById('list');
 
 var sortable = new Sortable(el, {
-    multiDrag: true,
-    selectedClass: 'selected',
-    fallbackTolerance: 3,
+    swap: true,
+    swapClass: "highlight",
     animation: 150,
 });
