@@ -3791,5 +3791,6 @@
   Sortable.mount(new MultiDragPlugin());
 
   return Sortable;
-
+  
 })));
+

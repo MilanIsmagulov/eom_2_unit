@@ -457,6 +457,7 @@ p{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 5px;
 }
 
 .numbers > span {
@@ -487,7 +488,7 @@ p{
 .list {
     display: flex;
     flex-direction: column;
-    gap: 0px;
+    gap: 10px;
     list-style: none;
     padding: 5px;
 }
@@ -501,6 +502,7 @@ p{
     font-size: 20px;
     border: solid 0px #00000080;
     border-radius: 12px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 ul li div{
@@ -518,10 +520,14 @@ ul li div{
     margin: 10px;
     height: 45px;
     border-radius: 12px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0);
 }
 
 @media (max-width: 1000px) {
+    ul li div{
+        width: 60vw;
+    }
+
     .answer_form_img{
         margin-left: 0;
         width: 90%;
@@ -602,6 +608,11 @@ ul li div{
 }
 
 @media (max-width: 650px) {
+    ul li div{
+        width: 250px;
+        height: 100px;
+    }
+
     footer{
         padding: 1px;
     }

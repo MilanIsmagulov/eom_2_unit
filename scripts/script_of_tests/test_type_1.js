@@ -1,6 +1,7 @@
 
 // Функция для создания теста
 function createTest(index) {
+
     removeAllEventListeners();
     const testData = data[index];
     const test = testData.test;
@@ -243,16 +244,20 @@ function resetTest() {
     restartButton.classList.remove('hidden');
     createTest(`index_${currentPageIndex}`);
     answerButton.classList.remove('hidden');
-    answerButton.addEventListener('click', () => {
+    answerButton.onclick = function(){
         const index = `index_${currentPageIndex}`;
         if (document.querySelector('.answers_btn')) {
             checkAnswers();
         } else {
             checkTextAnswers(index);
         }
-    });
+    };
+
     restartButton.addEventListener('click', resetTest);
 }
 
 // Инициализация первого теста при загрузке страницы
 resetTest();
+function checkAnwser(){
+
+}

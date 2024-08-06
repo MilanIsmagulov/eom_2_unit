@@ -1,5 +1,6 @@
 // Access answers array from the data object
 
+
 var anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
 answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
@@ -85,6 +86,7 @@ function loadList() {
         listItems.push(listItem);
         list.appendChild(listItem);
     });
+
 }
 
 
@@ -164,6 +166,14 @@ function checkAnwser() {
 
 function resetDynamicContainer() {
     setTimeout(updatePage(0), 500);
+}
+
+answerButton.onclick = function(){
+    checkAnwser();
+    answerButton.classList.add('hidden');
+    restartButton.classList.remove('hidden');
+    document.getElementById('control_button_2').style.display = 'none';
+    document.getElementById('control_button_3').style.display = 'inline-block';
 }
 
 var el = document.getElementById('list');

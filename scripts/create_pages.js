@@ -30,6 +30,8 @@ function clearLocalStorage(){
 
 // Функция для создания блока с текстом и изображением
 function createTextWithImage(paragraph) {
+    document.getElementById('control_button_3').style.display = 'none';
+    document.getElementById('control_button_2').style.display = 'inline-block';
     showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
     answerBtn.classList.add('gray_dis');
@@ -69,6 +71,8 @@ function createTextWithImage(paragraph) {
 
 // Функция для создания блока только с изображением
 function createOnlyImage(paragraph) {
+    document.getElementById('control_button_3').style.display = 'none';
+    document.getElementById('control_button_2').style.display = 'inline-block';
     showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
     answerBtn.classList.add('gray_dis');
@@ -99,6 +103,8 @@ function createOnlyImage(paragraph) {
 
 // Функция для создания блока только с текстом
 function createPlainText(paragraph) {
+    document.getElementById('control_button_3').style.display = 'none';
+    document.getElementById('control_button_2').style.display = 'inline-block';
     showAnswerBtn();
     const answerBtn = document.getElementById('control_button_2');
     answerBtn.classList.add('gray_dis');
@@ -179,15 +185,16 @@ function displayPage(index) {
             if (testItem.hasOwnProperty('type')) {
                 switch (testItem.type) {
                     case 1:
-                        console.log('Неизвестный тип теста');
-                        //replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
+                        
+                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 2:
-                        console.log('Неизвестный тип теста');
-                        //replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
+                        
+                        replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 3:
                         replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
+                        
                         break;
                     case 4:
                         replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
@@ -203,6 +210,8 @@ function displayPage(index) {
         });
 
     } else if (pageData.hasOwnProperty('result')) {
+        document.getElementById('control_button_3').style.display = 'none';
+        document.getElementById('control_button_2').style.display = 'inline-block';
         const script = document.createElement('script');
         script.src = './scripts/script_of_tests/result_of_test.js';
         script.async = true;
@@ -300,6 +309,9 @@ function createMarkers() {
     }
 }
 
+function resetPage(){
+    updatePage(0);
+}
 
 // Удаление всех обработчиков событий с кнопок
 function removeAllEventListeners() {
