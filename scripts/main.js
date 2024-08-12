@@ -31,7 +31,7 @@ function waitForData() {
 
         window.addEventListener('load',(e) => {
             let windowWidth  = window.innerWidth;
-            if (windowWidth  <=  1000)  {
+            if (windowWidth  <=  1200)  {
                 forwardButton.innerHTML  =  '<img src="./content/arrow_forward.svg" alt=">">';
                 backButton.innerHTML  =  '<img src="./content/arrow_back.svg" alt="<">';
             } else {
@@ -42,7 +42,7 @@ function waitForData() {
 
         window.addEventListener('resize',(e) => {
             let windowWidth  = window.innerWidth;
-            if (windowWidth  <=  1000)  {
+            if (windowWidth  <=  1200)  {
                 forwardButton.innerHTML  =  '<img src="./content/arrow_forward.svg" alt=">">';
                 backButton.innerHTML  =  '<img src="./content/arrow_back.svg" alt="<">';
             } else {

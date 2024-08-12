@@ -844,3 +844,12 @@ ul li div{
     }
 }
 
+@media (max-width: 510px) {
+    .answer_form {
+        min-width: 350px;
+
+    }
+    .answer_form p{
+        font-size: 14px !important;
+    }
+}
