@@ -35,6 +35,7 @@ function waitForData() {
                 }
 
                 if (testWithText) {
+                    descriptionDiv.className = 'description_w_input';
                     const label = document.createElement('label');
                     label.htmlFor = 'test_type_2';
                     label.textContent = 'Введите ответ:';
@@ -48,6 +49,7 @@ function waitForData() {
                     input.dataset.correctAnswer = testWithText.test_with_text.replace(/[\{\}=]/g, '').split(';').map(ans => ans.trim()).join(';');
                     descriptionDiv.appendChild(input);
                 } else if (testWithText2) {
+                    descriptionDiv.className = 'description_w_input_2';
                     const parts = testWithText2.test_with_text_2.split(/\{=.*?\}/);
                     const matches = [...testWithText2.test_with_text_2.matchAll(/\{=(.*?)\}/g)];
                     parts.forEach((part, index) => {
