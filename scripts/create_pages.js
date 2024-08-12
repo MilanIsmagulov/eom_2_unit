@@ -1,17 +1,19 @@
+// Логика, которая зависит от данных
+// Инициализация текущего индекса страницы
+let currentPageIndex = 1;
+let currentTestIndex = null;
+const answerButton = document.getElementById('control_button_2');
+const restartButton = document.getElementById('control_button_3');
+const testContainer = document.getElementById('test-container');
+const contentDiv = document.getElementById('content');
+const mainBody = document.getElementById('main_body_1');
+const backWardBtn = document.getElementById('control_button_1');
+const nextBtn = document.getElementById('control_button_4');
+const answerBtn = document.getElementById('control_button_2');
+
 function waitForData() {
     if (window.dataLoaded) {
-        // Логика, которая зависит от данных
-        // Инициализация текущего индекса страницы
-        let currentPageIndex = 1;
-        let currentTestIndex = null;
-        const answerButton = document.getElementById('control_button_2');
-        const restartButton = document.getElementById('control_button_3');
-        const testContainer = document.getElementById('test-container');
-        const contentDiv = document.getElementById('content');
-        const mainBody = document.getElementById('main_body_1');
-        const backWardBtn = document.getElementById('control_button_1');
-        const nextBtn = document.getElementById('control_button_4');
-        const answerBtn = document.getElementById('control_button_2');
+
 
 
         function addFirstBtn(){

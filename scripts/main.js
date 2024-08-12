@@ -1,31 +1,33 @@
+let stepMarkerPlace = document.querySelector('.step_marker');
+let backButton  = document.querySelector('#control_button_1');
+let ansverButton  = document.querySelector('#control_button_2');
+let reloadButton  = document.querySelector('#control_button_3');
+let forwardButton  = document.querySelector('#control_button_4');
+let titleUpper = document.querySelector('#upper_title');
+let blackHeader  = document.querySelector('#header_text');
+let numberOfQuestion = 1; 
+let numberOfQuestionSum = Object.keys(data).length;
+let windowWidth  = window.innerWidth;
+let originalTitle = title_of_eom;
+
+
+for (let i = 0; i < numberOfQuestion; i++){
+    let markers = document.createElement('img');
+    markers.src = "./content/radio_button_blue.svg";
+    markers.classList.add('radio_button_blue');
+    stepMarkerPlace.appendChild(markers);
+}
+
+for (let i = 0; i < numberOfQuestionSum-numberOfQuestion; i++){
+    let markers = document.createElement('img');
+    markers.src = "./content/radio_button.svg";
+    markers.classList.add('radio_button_gray');
+    stepMarkerPlace.appendChild(markers);
+}
+
 function waitForData() {
     if (window.dataLoaded) {
-        let stepMarkerPlace = document.querySelector('.step_marker');
-        let backButton  = document.querySelector('#control_button_1');
-        let ansverButton  = document.querySelector('#control_button_2');
-        let reloadButton  = document.querySelector('#control_button_3');
-        let forwardButton  = document.querySelector('#control_button_4');
-        let titleUpper = document.querySelector('#upper_title');
-        let blackHeader  = document.querySelector('#header_text');
-        let numberOfQuestion = 1; 
-        let numberOfQuestionSum = Object.keys(data).length;
-        let windowWidth  = window.innerWidth;
-        let originalTitle = title_of_eom;
 
-
-        for (let i = 0; i < numberOfQuestion; i++){
-            let markers = document.createElement('img');
-            markers.src = "./content/radio_button_blue.svg";
-            markers.classList.add('radio_button_blue');
-            stepMarkerPlace.appendChild(markers);
-        }
-
-        for (let i = 0; i < numberOfQuestionSum-numberOfQuestion; i++){
-            let markers = document.createElement('img');
-            markers.src = "./content/radio_button.svg";
-            markers.classList.add('radio_button_gray');
-            stepMarkerPlace.appendChild(markers);
-        }
 
         window.addEventListener('load',(e) => {
             let windowWidth  = window.innerWidth;
