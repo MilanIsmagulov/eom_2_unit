@@ -1,4 +1,4 @@
-const title_of_eom = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste fugiat voluptatum quos rerum, repudiandae doloribus dolores pariatur explicabo laborum corporis!';
+let title_of_eom = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste fugiat voluptatum quos rerum, repudiandae doloribus dolores pariatur explicabo laborum corporis!';
 
 const data = {
     "index_1":{
