@@ -11,10 +11,10 @@ const backWardBtn = document.getElementById('control_button_1');
 const nextBtn = document.getElementById('control_button_4');
 const answerBtn = document.getElementById('control_button_2');
 
+
+
 function waitForData() {
     if (window.dataLoaded) {
-
-
 
         function addFirstBtn(){
             const answerBtn = document.getElementById('control_button_2');
@@ -355,6 +355,7 @@ function waitForData() {
 
         // Обновленная функция для обновления страницы
         function updatePage(step) {
+
             showAnswerBtn();
             
             // Удаляем скрипты тестов перед переходом на новую страницу
@@ -391,7 +392,15 @@ function waitForData() {
                 backWardBtn.classList.remove('gray_dis')
                 backWardBtn.disabled = false;
             }
-
+            // Используем setTimeout, чтобы убедиться, что скролл выполняется после изменения контента
+            setTimeout(() => {
+                document.getElementById('contentWrapper').scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'auto' // Мгновенно (auto) или плавно (smooth)
+                });
+                
+            }, 0);
         }
 
         function showAnswerBtn(){
