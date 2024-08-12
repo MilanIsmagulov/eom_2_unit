@@ -69,7 +69,7 @@ function createTest(index) {
     }
 
     // Отображение изображения, если имеется
-    if (imageInfo) {
+    if (imageInfo && test.find(item => item.type === 1) || test.find(item => item.type === 2)) {
         const imageDiv = document.createElement('div');
         imageDiv.className = 'image_test_type_2';
         const img = document.createElement('img');

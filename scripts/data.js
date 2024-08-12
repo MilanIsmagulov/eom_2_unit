@@ -1,4 +1,4 @@
-let title_of_eom = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste fugiat voluptatum quos rerum, repudiandae doloribus dolores pariatur explicabo laborum corporis!';
+const title_of_eom = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste fugiat voluptatum quos rerum, repudiandae doloribus dolores pariatur explicabo laborum corporis!';
 
 const data = {
     "index_1":{
@@ -29,7 +29,7 @@ const data = {
             {"type": 1},
            
             {"answers": [
-                "First Answer",
+                "First Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores, fugit est ducimus dolor possimus officiis reiciendis nesciunt perferendis facilis? Answer",
                 "Second Answer",
                 "Third Answer",
                 "Four Answer"
@@ -182,7 +182,7 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 3},
-            
+            {"image": true, "image_path": "./content/test_image.png"},
             {"answers": [
                 "First Answer",
                 "Second Answer",
@@ -198,7 +198,7 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 3},
-            
+            {"image": true, "image_path": "./content/test_image.png"},
             {"answers": [
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores?",
                 "First Answer",
@@ -209,6 +209,21 @@ const data = {
         ],
     },
     "index_15":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 4},
+            {"image": true, "image_path": "./content/test_image.png"},
+            {"answers": [
+                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores?",
+                "First Answer",
+                "Second Answer",
+                "Third Answer",
+                "Four Answer"
+            ]}
+        ],
+    },
+    "index_16":{
         "subtitle": "Тут типа результаты",
         "step_of_popup": "Тут типа результаты",
         "result":[]

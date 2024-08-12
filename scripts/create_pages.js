@@ -189,18 +189,16 @@ function displayPage(index) {
                         replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 2:
-                        
                         replaceScript('./scripts/script_of_tests/test_type_1.js', 'test-script');
                         break;
                     case 3:
                         replaceScript('./scripts/script_of_tests/test_type_2.js', 'test-script');
-                        
                         break;
                     case 4:
-                        replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
+                        replaceScript('./scripts/script_of_tests/test_type_3.js', 'test-script');
                         break;
                     case 5:
-                        replaceScript('./scripts/script_of_tests/test_type_5.js', 'test-script');
+                        replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
                         break;
                     default:
                         console.log('Неизвестный тип теста');
@@ -210,8 +208,10 @@ function displayPage(index) {
         });
 
     } else if (pageData.hasOwnProperty('result')) {
+
         document.getElementById('control_button_3').style.display = 'none';
         document.getElementById('control_button_2').style.display = 'inline-block';
+
         const script = document.createElement('script');
         script.src = './scripts/script_of_tests/result_of_test.js';
         script.async = true;

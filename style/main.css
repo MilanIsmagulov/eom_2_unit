@@ -355,7 +355,9 @@ p{
 }
 
 .answer_form {
-    width: 60vw;
+    min-width: 600px;
+    max-width: 1000px;
+    width: 100%;
     margin-left: 25px;
 }
 
@@ -483,6 +485,7 @@ p{
     padding: 15px;
     padding-left: 25px;
     cursor: grab;
+    font-size: clamp(15px, 1.35vw, 20px);
 }
 
 .list {
@@ -516,14 +519,101 @@ ul li div{
     font-weight: 600;
     font-size: 20px;
     border: solid 0px #00000080;
-    width: 650px;
+    min-width: 450px;
+    width: 100%;
+    max-width: 800px;
     margin: 10px;
     height: 45px;
     border-radius: 12px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0);
 }
 
+.main_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.main_wrapper img{
+    margin-left: 25px;
+    margin-right: 25px;
+    min-width: 450px;
+    width: 35%;
+}
+
+.result_container{
+    margin-left: 25px !important;
+    margin-right: 25px !important;
+    margin-bottom: 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: auto;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+    width: auto;
+    margin: 10px;
+    border-radius: 20px;
+    padding: 25px;
+
+    font-weight: 500;
+    font-size: 25px;
+    height: 50px;
+    justify-content: flex-start;
+    padding-left: 50px;
+}
+
+.correct_answ {
+    font-size: 25px;
+}
+.correct_answ {
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+    font-weight: 500;
+}
+
+#answer_diagram_1 {
+    margin: 40px;
+}
+
+#result_container_3{
+    min-height: 200px;
+}
+
+.correct_answ p {
+    font-weight: 700;
+    color: rgb(255, 114, 118);
+    margin: 0 0 0 25px !important;
+}
+
+#place_question_number{
+    font-weight: 700;
+    color: rgb(255, 114, 118);
+    margin: 0 0 0 25px !important;
+}
+
+#place_question_percent{
+    font-weight: 700;
+    color: rgb(255, 114, 118);
+    margin: 0 0 0 25px !important;
+}
+
 @media (max-width: 1000px) {
+    #dynamic-content{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main_wrapper{
+        flex-direction: column;
+    }
+    .main_wrapper img{
+        width: 80%;
+        margin-bottom: 25px;
+    }
+
     ul li div{
         width: 60vw;
     }
@@ -609,6 +699,7 @@ ul li div{
 
 @media (max-width: 650px) {
     ul li div{
+        min-width: auto;
         width: 250px;
         height: 100px;
     }

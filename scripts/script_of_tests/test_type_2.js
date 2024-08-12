@@ -1,7 +1,12 @@
 // Access answers array from the data object
+document.getElementById('control_button_3').style.display = 'none';
+document.getElementById('control_button_2').style.display = 'inline-block';
+
+var testObj = data[`index_${currentPageIndex}`].test;
+var anwserArr = testObj.find(item => item.answers).answers;
+var imageObj = testObj.find(item => item.image !== undefined);
 
 
-var anwserArr = data[`index_${currentPageIndex}`].test.find(item => item.answers).answers;
 answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
 restartButton.classList.add('hidden');
@@ -10,9 +15,23 @@ var dynamicContainer = document.createElement('div');
 dynamicContainer.className = 'dynamic-content';
 var dragObj = document.createElement('div');
 dragObj.className = 'numbers';
-contentDiv.appendChild(dynamicContainer);
+var mainWrapper = document.createElement('div');
+mainWrapper.classList.add('main_wrapper');
+
+// Check if an image should be displayed
+if (imageObj && imageObj.image) {
+    var imgElement = document.createElement('img');
+    imgElement.src = imageObj.image_path
+    imgElement.alt = 'Test Image';
+    imgElement.className = 'test-image';
+    mainWrapper.appendChild(imgElement);
+}
+
+contentDiv.appendChild(mainWrapper);
+mainWrapper.appendChild(dynamicContainer);
 dynamicContainer.appendChild(dragObj);
-localStorage.removeItem('data1');
+localStorage.removeItem('data_for_list');
+
 
 var list = document.createElement('ul');
 list.className = 'list';
@@ -26,7 +45,7 @@ var dragStartIndex;
 init();
 
 function init() {
-    localStorage.getItem('data1') ? loadList() : createList();
+    localStorage.getItem('data_for_list') ? loadList() : createList();
 }
 
 function createList() {
@@ -49,14 +68,12 @@ function createList() {
         list.appendChild(listItem);
     });
 
-
     for (i in listItems) {
         storeItems.push(i);
     }
 
-    localStorage.setItem('data1', JSON.stringify(storeItems));
+    localStorage.setItem('data_for_list', JSON.stringify(storeItems));
 }
-
 
 function loadList() {
     fromStore();
@@ -86,19 +103,15 @@ function loadList() {
         listItems.push(listItem);
         list.appendChild(listItem);
     });
-
 }
-
 
 function toStore() {
-    localStorage.setItem('data1', JSON.stringify(storeItems));
+    localStorage.setItem('data_for_list', JSON.stringify(storeItems));
 }
-
 
 function fromStore() {
-    storeItems = JSON.parse(localStorage.getItem('data1'));
+    storeItems = JSON.parse(localStorage.getItem('data_for_list'));
 }
-
 
 function dragStart() {
     dragStartIndex = +this.closest('li').getAttribute('id');
@@ -123,7 +136,6 @@ function dragDrop() {
     this.classList.remove('over');
 }
 
-
 function swapItems(fromIndex, toIndex) {
     const itemOne = listItems[fromIndex].querySelector('.item');
     const itemTwo = listItems[toIndex].querySelector('.item');
@@ -133,42 +145,36 @@ function swapItems(fromIndex, toIndex) {
 
     storeItems = [];
     for (i of listItems) {
-        
         storeItems.push(i.children[1].innerText);
     }
-    localStorage.setItem('data1', JSON.stringify(storeItems));
+    localStorage.setItem('data_for_list', JSON.stringify(storeItems));
 }
 
 function checkAnwser() {
+    let isCorrect = true;
+
     listItems = document.getElementsByClassName("list");
-    let i = 0;
 
-    for (item of listItems[0].children){
-        itemText = item.getElementsByTagName('div')[0].innerText;
-        let index = i;
+    for (let i = 0; i < listItems[0].children.length; i++) {
+        const itemText = listItems[0].children[i].getElementsByTagName('div')[0].innerText;
 
-        if (itemText !== anwserArr[index]) {
-            item.classList.add('incorrect');
-            answerButton.classList.add('hidden');
-            restartButton.classList.remove('hidden');
-            localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: false}));
-
+        if (itemText !== anwserArr[i]) {
+            isCorrect = false;
+            listItems[0].children[i].classList.add('incorrect');
+            listItems[0].children[i].classList.remove('correct');
         } else {
-            item.classList.add('correct');
-            item.classList.remove('incorrect');
-            answerButton.classList.add('hidden');
-            restartButton.classList.remove('hidden');
-            localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: true}));
+            listItems[0].children[i].classList.add('correct');
+            listItems[0].children[i].classList.remove('incorrect');
         }
-        i++;
     }
+
+    answerButton.classList.add('hidden');
+    restartButton.classList.remove('hidden');
+
+    localStorage.setItem('answer_form_' + `index_${currentPageIndex}`, JSON.stringify({questionPlace: isCorrect}));
 }
 
-function resetDynamicContainer() {
-    setTimeout(updatePage(0), 500);
-}
-
-answerButton.onclick = function(){
+answerButton.onclick = function() {
     checkAnwser();
     answerButton.classList.add('hidden');
     restartButton.classList.remove('hidden');
