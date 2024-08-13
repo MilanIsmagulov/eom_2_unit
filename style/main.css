@@ -514,7 +514,7 @@ p{
     padding: 5px;
 }
 
-.item, .item2 {
+.item {
     list-style-image: none;
     margin: 5px;
     padding: 15px;
@@ -699,7 +699,7 @@ ul li div{
     gap: 30px;
 }
 
-.row, .row2 {
+.row {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -766,6 +766,78 @@ ul li div{
     height: 50px;
     border-radius: 5px;
 	background-color: #00000030;
+}
+
+.drag-inner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.drag3 {
+    display: flex;
+    align-items: center;
+}
+
+.row2 {
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    min-height: 50px;
+    min-width: 50%;
+    border: 1px solid rgba(0, 114, 192, 0.05);
+    background-color: rgba(0, 114, 192, 0.1);
+    border-radius: 25px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.left-col, .right-col {
+    height: 468px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.field {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    min-height: 30px;
+    max-height: 30px;
+    min-width: 250px;
+    max-width: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    list-style: none;
+    transition: all 0.3s;
+    background-color: #fff;
+}
+
+.item3 {
+    white-space: nowrap;
+    list-style-image: none;
+    text-align: center;
+    margin: 10px;
+    font-size: 20px !important;
+    border: 1px solid #0070c0;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    width: auto;
+    border-radius: 15px;
+    cursor: grab;
+}
+
+.img img {
+    max-width: 100%;
+    max-height: 460px;
+    min-height: 100px;
+    min-width: 100px;
 }
 
 @media (max-width: 1200px) {
