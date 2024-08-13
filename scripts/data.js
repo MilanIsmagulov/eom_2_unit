@@ -215,17 +215,30 @@ const data = {
         "step_of_popup": "step 2",
         "test":[
             {"type": 4},
-            {"image": true, "image_path": "./content/test_image.png"},
+            {"image": "['./content/tests_content/03_01.png', './content/tests_content/03_02.png', './content/tests_content/03_03.png']"},
             {"answers": [
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae dolores consequatur temporibus pariatur voluptatem eius ea asperiores?",
-                "First Answer",
-                "Second Answer",
-                "Third Answer",
-                "Four Answer"
+                "Шибер",
+                "Клин",
+                "Диск",
+                
             ]}
         ],
     },
     "index_16":{
+        "subtitle": "subtitle 3333",
+        "step_of_popup": "step 2",
+        "test":[
+            {"type": 5},
+            {"image": "['./content/tests_content/03_01.png', './content/tests_content/03_02.png', './content/tests_content/03_03.png']"},
+            {"answers": [
+                "Шибер",
+                "Клин",
+                "Диск",
+                
+            ]}
+        ],
+    },
+    "index_17":{
         "subtitle": "Тут типа результаты",
         "step_of_popup": "Тут типа результаты",
         "result":[]

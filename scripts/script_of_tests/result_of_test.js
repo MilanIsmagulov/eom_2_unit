@@ -1,6 +1,7 @@
 document.getElementById('control_button_2').style.display = 'none';
 document.getElementById('control_button_3').style.display = 'inline-block';
-
+document.getElementById('control_button_1').classList.add('gray_dis');
+document.getElementById('control_button_1').disabled = true;
 
 
 document.getElementById('control_button_3').onclick = function() {
@@ -66,9 +67,11 @@ for (let i = 0; i < localStorage.length; i++) {
             // console.log("Ключ не содержит questionPlace:", key); // Отладочная информация
         }
     }
-    if(totalCount === scoreTests){
-        console.log("Несовпадение длины localStorage и const data");
-    }
+
+}
+
+if(totalCount !== scoreTests){
+    console.log("Несовпадение длины localStorage и const data");
 }
 
 // Результаты
@@ -76,15 +79,15 @@ for (let i = 0; i < localStorage.length; i++) {
 // console.log("Количество объектов с questionPlace: true:", questionPlaceTrueCount);
 // console.log("Количество объектов с questionPlace: false:", questionPlaceFalseCount);
 
-let percentOfAnswers =  Math.floor((questionPlaceTrueCount/totalCount)*100)
+let percentOfAnswers =  Math.floor((questionPlaceTrueCount/scoreTests)*100)
 
 // Массив идентификаторов для контейнеров
 const containerIds = ['result_container_1', 'result_container_2', 'result_container_3'];
 
 // Массив контента для каждого контейнера
 const content = [
-    `1. Количество тестовых (оцениваемых) заданий: <span id="place_question_number">${totalCount}</span>`, //Не правильно
-    `2. Ваш результат: <span id="place_question_percent">${Math.floor((questionPlaceTrueCount/totalCount)*100)} <b>%</b></span>`,
+    `1. Количество тестовых (оцениваемых) заданий: <span id="place_question_number">${scoreTests}</span>`, //Не правильно
+    `2. Ваш результат: <span id="place_question_percent">${Math.floor((questionPlaceTrueCount/scoreTests)*100)} <b>%</b></span>`,
     `<div class="correct_answ"> Количество правильных ответов: <p id="result_place_1">${questionPlaceTrueCount}</p></div> 
     <div id="answer_diagram_1" class="pie animate no-round" style="--p: ${percentOfAnswers}; --c:rgb(0, 114, 192);"></div>
     <div class="correct_answ"> Количество неправильных ответов: <p id="result_place_2">${questionPlaceFalseCount}</p></div>`

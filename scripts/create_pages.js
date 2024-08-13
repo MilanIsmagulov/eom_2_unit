@@ -314,15 +314,7 @@ function waitForData() {
             }
         }
 
-        function resetPage(){
-            updatePage(0);
-        }
 
-        // Удаление всех обработчиков событий с кнопок
-        function removeAllEventListeners() {
-            document.getElementById('control_button_2').removeEventListener('click', checkAnswers);
-            document.getElementById('control_button_3').removeEventListener('click', resetTest);
-        }
 
         // Очистка контента страницы перед загрузкой нового теста
         function clearContent() {
@@ -351,6 +343,10 @@ function waitForData() {
             }
 
             clearContent();
+        }
+
+        function resetPage(){
+            updatePage(0);
         }
 
         // Обновленная функция для обновления страницы
@@ -412,6 +408,7 @@ function waitForData() {
         // Добавление обработчиков событий для кнопок навигации
         document.getElementById('control_button_1').addEventListener('click', () => updatePage(-1));
         document.getElementById('control_button_4').addEventListener('click', () => updatePage(1));
+        document.getElementById('control_button_3').addEventListener('click', () => updatePage(0));
 
         // Начальное отображение первой страницы и маркеров
         displayPage(currentPageIndex);
@@ -425,5 +422,6 @@ function waitForData() {
 }
 
 waitForData();
+
 
 

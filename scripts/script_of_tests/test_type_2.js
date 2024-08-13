@@ -11,6 +11,7 @@ answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
 restartButton.classList.add('hidden');
 restartButton.disabled = false;
+
 var dynamicContainer = document.createElement('div');
 dynamicContainer.className = 'dynamic-content';
 var dragObj = document.createElement('div');
