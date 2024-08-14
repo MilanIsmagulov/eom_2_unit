@@ -1115,6 +1115,12 @@ ul li div{
 }
 
 @media (max-width: 510px) {
+    .field {
+        min-width: 100px;
+        max-width: 100px;
+        padding: 5px;
+    }
+
     .answer_form {
         min-width: 350px;
     }

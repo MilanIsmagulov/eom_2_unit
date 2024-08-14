@@ -163,27 +163,36 @@ function waitForData() {
         }
 
         function checkAnwser5() {
+            let isTestCorrect = true; // Общая переменная, которая определяет правильность всего теста
+        
             fullList.forEach((item, index) => {
+                let isCorrect = true; // Локальная переменная для проверки каждого элемента
+        
                 if (item.querySelector('.item3')?.innerText.trim() === undefined) {
-                    item.classList.add('incorrect')
-                    localStorage.setItem('answer_form_index_' + `${currentPageIndex}`, JSON.stringify({questionPlace: false}));
-                    rightcheck=0
+                    item.classList.add('incorrect');
+                    isCorrect = false;
                 } else {
-                    var itemName = item.querySelector('.item3').innerText.trim();
-
+                    let itemName = item.querySelector('.item3').innerText.trim();
+        
                     if (itemName !== anwserArr3[index]) {
-                        item.classList.add('incorrect')
-                        rightcheck=0
-                        localStorage.setItem('answer_form_index_' + `${currentPageIndex}`, JSON.stringify({questionPlace: false}));
+                        item.classList.add('incorrect');
+                        isCorrect = false;
                     } else {
-                        item.classList.remove('incorrect')
-                        item.classList.add('correct')
+                        item.classList.remove('incorrect');
+                        item.classList.add('correct');
                     }
                 }
-            })
-            if (rightcheck==1){
-                localStorage.setItem('answer_form_index_' + `${currentPageIndex}`, JSON.stringify({questionPlace: true}));
-            }
+        
+                // Если хотя бы один элемент неправильный, общий результат теста - неверный
+                if (!isCorrect) {
+                    isTestCorrect = false;
+                }
+        
+                localStorage.setItem('answer_form_index_' + `${currentPageIndex}`, JSON.stringify({questionPlace: isCorrect}));
+            });
+        
+            // Сохраняем общий результат теста
+            localStorage.setItem('answer_form_index_' + `${currentPageIndex}`, JSON.stringify({questionPlace: isTestCorrect}));
         }
 
         answerButton.onclick = function() {
