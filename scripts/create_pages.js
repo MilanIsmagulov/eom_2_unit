@@ -57,16 +57,25 @@ function waitForData() {
                 }
                 // Если есть изображение, создаем и добавляем элемент изображения
                 if (item.image) {
+
                     const imgContainer = document.createElement('div');
                     imgContainer.className = 'img_with_sgn';
-                    const imgElement = document.createElement('img');
-                    imgElement.src = item.image_path;
-                    imgElement.alt = 'image';
-                    const caption = document.createElement('p');
-                    caption.textContent = item.img_sign || 'Текст подпись к рисунку (Проверьте данные в data.js)';
-                    imgContainer.appendChild(imgElement);
-                    imgContainer.appendChild(caption);
-                    container.appendChild(imgContainer);
+                    let imgElement;
+                    if (item.image_path.includes(".jpg") || item.image_path.includes(".png")) {
+                        imgElement = document.createElement('img');
+                    } else if (item.image_path.includes(".mp4")) {
+                        imgElement = document.createElement('video');
+                        imgElement.controls = "controls";
+                    }
+                    if (imgElement) {  // Проверяем, что элемент был создан
+                        imgElement.src = item.image_path;
+                        imgElement.alt = 'img_with_sgn';
+                        const caption = document.createElement('p');
+                        caption.textContent = item.img_sign || 'Текст подпись к рисунку (Проверьте данные в data.js)';
+                        imgContainer.appendChild(imgElement);
+                        imgContainer.appendChild(caption);
+                        container.appendChild(imgContainer);
+                    }
                 }
             });
 
@@ -92,13 +101,22 @@ function waitForData() {
             paragraph.forEach(item => {
                 // Если есть изображение, создаем и добавляем элемент изображения
                 if (item.image) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = item.image_path;
-                    imgElement.alt = 'image';
-                    const caption = document.createElement('p');
-                    caption.textContent = item.img_sign || 'Текст подпись к рисунку (Проверьте данные в data.js)';
-                    container.appendChild(imgElement);
-                    container.appendChild(caption);
+                    let imgElement;
+                    if (item.image_path.includes(".jpg") || item.image_path.includes(".png")) {
+                        imgElement = document.createElement('img');
+                    } else if (item.image_path.includes(".mp4")) {
+                        imgElement = document.createElement('video');
+                        imgElement.controls = "controls";
+                    }
+                
+                    if (imgElement) {  // Проверяем, что элемент был создан
+                        imgElement.src = item.image_path;
+                        imgElement.alt = 'image';
+                        const caption = document.createElement('p');
+                        caption.textContent = item.img_sign || 'Текст подпись к рисунку (Проверьте данные в data.js)';
+                        container.appendChild(imgElement);
+                        container.appendChild(caption);
+                    }
                 }
             });
 

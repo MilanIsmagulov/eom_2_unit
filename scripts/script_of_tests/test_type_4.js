@@ -1,3 +1,6 @@
+document.getElementById('control_button_3').style.display = 'none';
+document.getElementById('control_button_2').style.display = 'inline-block';
+
 var testObj = data[`index_${currentPageIndex}`].test; // 
 var anwserArr3 = testObj.find(item => item.answers).answers; // 
 // anwserArr3 - элементы соотвествуют ячейке. Слево направо, сверху вниз
