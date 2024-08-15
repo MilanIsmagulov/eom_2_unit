@@ -224,7 +224,7 @@ function waitForData() {
                                 replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
                                 break;
                             default:
-                                console.log('Неизвестный тип теста');
+                                //console.log('Неизвестный тип теста');
                                 break;
                         }
                     }
@@ -288,18 +288,18 @@ function waitForData() {
                 const modalWindow = document.getElementById('popup_window_id')
 
                 if (!modalWindow.classList.contains('disabled') && !pageData.hasOwnProperty('test')){
-                    console.log('Модальное окно закрыто и мы на странице теории!')
+                    //console.log('Модальное окно закрыто и мы на странице теории!')
                 } else if (!modalWindow.classList.contains('enabled') && !pageData.hasOwnProperty('test')){
-                    console.log('Модальное окно открыто и мы на странице теории!')
+                    //console.log('Модальное окно открыто и мы на странице теории!')
                 } else if (!modalWindow.classList.contains('disabled') && pageData.hasOwnProperty('test')){
-                    console.log('Модальное окно закрыто и мы на странице теста!')
+                    //console.log('Модальное окно закрыто и мы на странице теста!')
                 } else if (!modalWindow.classList.contains('enabled') && pageData.hasOwnProperty('test')){
-                    console.log('Модальное окно открыто и мы на странице теста!')
+                    //console.log('Модальное окно открыто и мы на странице теста!')
                 }
                 if (answerBtn.classList.contains('gray_dis')){
-                    console.log('Кнопка ответа заблокированна!!!')
+                    //console.log('Кнопка ответа заблокированна!!!')
                 } else {
-                    console.log('Кнопка ответа разблокированна!!!')
+                    //console.log('Кнопка ответа разблокированна!!!')
                 }
             }
         }
@@ -432,7 +432,7 @@ function waitForData() {
         displayPage(currentPageIndex);
         createMarkers();
 
-        console.log("Данные загружены, продолжаем выполнение скрипта.");
+        //console.log("Данные загружены, продолжаем выполнение скрипта.");
     } else {
         // Если данные ещё не загружены, ждем и проверяем снова
         setTimeout(waitForData, 50);

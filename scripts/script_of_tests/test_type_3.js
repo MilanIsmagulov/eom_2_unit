@@ -10,7 +10,7 @@ var testObj = data[`index_${currentPageIndex}`].test;
 var anwserArr4 = testObj.find(item => item.answers).answers;
 var imgPathArr = JSON.parse((testObj.find(item => item.image !== undefined).image).replace(/'/g, '"'));
 
-console.log(imgPathArr);
+//console.log(imgPathArr);
 
 function waitForData() {
     if (window.dataLoaded) {
@@ -256,7 +256,7 @@ function waitForData() {
             document.getElementById('control_button_3').style.display = 'inline-block';
         };
 
-        console.log("Данные загружены, продолжаем выполнение скрипта.");
+        //console.log("Данные загружены, продолжаем выполнение скрипта.");
     } else {
         // Если данные ещё не загружены, ждем и проверяем снова
         setTimeout(waitForData, 50);

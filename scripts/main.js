@@ -112,7 +112,7 @@ function waitForData() {
         window.addEventListener('resize', adjustContentWrapper);
 
         waitTitle();
-        console.log("Данные загружены, продолжаем выполнение скрипта.");
+        //console.log("Данные загружены, продолжаем выполнение скрипта.");
     } else {
         // Если данные ещё не загружены, ждем и проверяем снова
         setTimeout(waitForData, 50);

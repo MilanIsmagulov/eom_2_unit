@@ -6,7 +6,6 @@ var testObj = data[`index_${currentPageIndex}`].test;
 var anwserArr = testObj.find(item => item.answers).answers;
 var imageObj = testObj.find(item => item.image !== undefined);
 
-
 answerButton.classList.remove('gray_dis');
 answerButton.disabled = false;
 restartButton.classList.add('hidden');

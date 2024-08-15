@@ -32,18 +32,18 @@ for (const key in data) {
 var scoreTests = tests.length;
 
 // Переменные для хранения результатов
-let totalCount = 0;
-let questionPlaceTrueCount = 0;
-let questionPlaceFalseCount = 0;
+var totalCount = 0;
+var questionPlaceTrueCount = 0;
+var questionPlaceFalseCount = 0;
 
 // Проходим по всем ключам в localStorage
-for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
+for (var i = 0; i < localStorage.length; i++) {
+    var key = localStorage.key(i);
     // console.log("Проверяем ключ:", key); // Отладочная информация
 
     // Проверяем, начинается ли ключ с "answer_"
     if (key.startsWith("answer_")) {
-        let value;
+        var value;
         
         try {
             value = JSON.parse(localStorage.getItem(key)); // Парсим значение в объект
@@ -71,15 +71,19 @@ for (let i = 0; i < localStorage.length; i++) {
 }
 
 if(totalCount !== scoreTests){
-    console.log("Несовпадение длины localStorage и const data");
+    //console.log("Несовпадение длины localStorage и const data");
 }
+
+if ((questionPlaceTrueCount + questionPlaceFalseCount) !== scoreTests) {
+    var questionPlaceFalseCount = scoreTests - questionPlaceTrueCount;
+} 
 
 // Результаты
 // console.log("Общее количество объектов:", totalCount);
 // console.log("Количество объектов с questionPlace: true:", questionPlaceTrueCount);
 // console.log("Количество объектов с questionPlace: false:", questionPlaceFalseCount);
 
-let percentOfAnswers =  Math.floor((questionPlaceTrueCount/scoreTests)*100)
+var percentOfAnswers =  Math.floor((questionPlaceTrueCount/scoreTests)*100)
 
 // Массив идентификаторов для контейнеров
 const containerIds = ['result_container_1', 'result_container_2', 'result_container_3'];
