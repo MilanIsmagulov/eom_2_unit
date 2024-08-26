@@ -223,8 +223,11 @@ function waitForData() {
                             case 5:
                                 replaceScript('./scripts/script_of_tests/test_type_4.js', 'test-script');
                                 break;
+                            case 6:
+                                replaceScript('./scripts/script_of_tests/test_type_5.js', 'test-script');
+                                break;
                             default:
-                                //console.log('Неизвестный тип теста');
+                                console.log('Неизвестный тип теста');
                                 break;
                         }
                     }

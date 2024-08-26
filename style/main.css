@@ -857,6 +857,70 @@ ul li div{
     min-width: 300px;
 }
 
+.body-inner {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-direction: column;
+    padding: 30px 30px 0 30px;
+}
+
+.drag1 {
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+    gap: 20px;
+}
+
+.numbers {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.number {
+    word-break: break-all;
+    white-space: normal;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    font-weight: 700;
+    background-color: rgb(0, 114, 192);
+    color: #fff;
+    border-radius: 5px 50px 50px 5px;
+    padding-left: 25px;
+    padding-right: 15px;
+    align-items: center;
+    height: 100px;
+    width: 25vw;
+}
+
+.number img {
+    width: 70px;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style: none;
+    padding: 10px;
+    justify-content: space-around;
+}
+
+.item_dr {
+    height: 100px;
+    width: 50vw;
+    font-size: clamp(18px, 1.2vw, 25px);
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 5px 5px 5px 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
 @media (max-width: 1200px) {
     .only_img video {
         width: 60%;
@@ -1015,6 +1079,16 @@ ul li div{
 }
 
 @media (max-width: 950px) {
+    .number{
+        font-size: 20px;
+    }
+    .item_dr{
+        height: 110px;
+        padding-left: 15px;
+        padding-right: 15px;
+        font-size: 18px;
+    }
+
     .only_img video {
         width: 70%;
     }
@@ -1036,7 +1110,14 @@ ul li div{
 
 
 @media (max-width: 700px) {
+    .drag1{
+        gap: 10px;
+    }
 
+    .item_dr{
+
+        font-size: 15px;
+    }
 
     #result_container_3 {
         justify-content: space-between;
@@ -1072,6 +1153,10 @@ ul li div{
 
 
 @media (max-width: 650px) {
+    .markers_of_blue{
+        display: none;
+    }
+
     .only_img video {
         width: 100%;
     }
@@ -1168,6 +1253,12 @@ ul li div{
 }
 
 @media (max-width: 510px) {
+    .number {
+        font-size: 15px;
+    }
+    .item_dr{
+        font-size: 13px;
+    }
     .correct_answ{
         font-size: 18px;
     }
